@@ -20,7 +20,6 @@ class ListItem extends AbstractDecorator
 		$dom = $this->getDocument()->createDocumentFragment();
 		foreach ($content as $value=>$innerHTML) {
 			$element = $this->getDocument()->createElement('li', $innerHTML);
-			$element->setAttribute('value', $value);
 			$dom->appendChild($element);
 		}
 		return $dom;
