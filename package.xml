@@ -16,11 +16,11 @@
     <email>alexandre@gaigalas.net</email>
     <active>yes</active>
   </developer>
-  <date>1970-01-01</date>
-  <time>00:00:01</time>
+  <date>2011-12-12</date>
+  <time>14:16:19</time>
   <version>
-    <release>0.1.0</release>
-    <api>0.1.0</api>
+    <release>0.1.1</release>
+    <api>0.1.1</api>
   </version>
   <stability>
     <release>alpha</release>
@@ -30,6 +30,10 @@
   <notes>-</notes>
   <contents>
     <dir name="library/Respect/Template" baseinstalldir="Respect/Template">
+      <file role="php" baseinstalldir="Respect/Template" install-as="/Decorator/AbstractDecorator.php" name="library/Respect/Template/Decorator/AbstractDecorator.php"/>
+      <file role="php" baseinstalldir="Respect/Template" install-as="/Decorator/ListItem.php" name="library/Respect/Template/Decorator/ListItem.php"/>
+      <file role="php" baseinstalldir="Respect/Template" install-as="/Decorator/Text.php" name="library/Respect/Template/Decorator/Text.php"/>
+      <file role="php" baseinstalldir="Respect/Template" install-as="/Html.php" name="library/Respect/Template/Html.php"/>
     </dir>
   </contents>
   <dependencies>
@@ -48,6 +52,17 @@
       <version>
         <release>0.1.0</release>
         <api>0.1.0</api>
+      </version>
+      <stability>
+        <release>alpha</release>
+        <api>alpha</api>
+      </stability>
+      <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD Style</license>
+    </release>
+    <release>
+      <version>
+        <release>0.1.1</release>
+        <api>0.1.1</api>
       </version>
       <stability>
         <release>alpha</release>
