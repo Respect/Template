@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" packagerversion="1.9.4" version="2.0" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0     http://pear.php.net/dtd/tasks-1.0.xsd     http://pear.php.net/dtd/package-2.0     http://pear.php.net/dtd/package-2.0.xsd">
+  <name>Template</name>
+  <channel>respect.li/pear</channel>
+  <summary>Pure HTML templates</summary>
+  <description>Pure HTML templates</description>
+  <lead>
+    <name>Alexandre Gaigalas</name>
+    <user>alganet</user>
+    <email>alexandre@gaigalas.net</email>
+    <active>yes</active>
+  </lead>
+  <developer>
+    <name>Alexandre Gaigalas</name>
+    <user>alganet</user>
+    <email>alexandre@gaigalas.net</email>
+    <active>yes</active>
+  </developer>
+  <date>1970-01-01</date>
+  <time>00:00:01</time>
+  <version>
+    <release>0.1.0</release>
+    <api>0.1.0</api>
+  </version>
+  <stability>
+    <release>alpha</release>
+    <api>alpha</api>
+  </stability>
+  <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD Style</license>
+  <notes>-</notes>
+  <contents>
+    <dir name="library/Respect/Template" baseinstalldir="Respect/Template">
+    </dir>
+  </contents>
+  <dependencies>
+    <required>
+      <php>
+        <min>5.3</min>
+      </php>
+      <pearinstaller>
+        <min>1.4.0</min>
+      </pearinstaller>
+    </required>
+  </dependencies>
+  <phprelease/>
+  <changelog>
+    <release>
+      <version>
+        <release>0.1.0</release>
+        <api>0.1.0</api>
+      </version>
+      <stability>
+        <release>alpha</release>
+        <api>alpha</api>
+      </stability>
+      <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD Style</license>
+    </release>
+  </changelog>
+</package>
