@@ -6,8 +6,8 @@ class HtmlTest extends \PHPUnit_Framework_TestCase
 	public function constructs()
 	{
 		return array(
-			array('<div id="test">_</div>', array('test'=>'Hi'), '<div id="test">_Hi</div>'),
-			array('<div id="test">_</div>', array('test'=>array('A','B')), '<div id="test">_<li>A</li><li>B</li></div>')
+			array('<ul id="test">_</ul>', array('#test'=>'Hi'), '<ul id="test">Hi</ul>'),
+			array('<ul id="test">_</ul>', array('#test'=>array('A','B')), '<ul id="test"><li>A</li><li>B</li></ul>')
 		);
 	}
 	

@@ -10,9 +10,19 @@
          stopOnFailure="false"
          syntaxCheck="false"
          verbose="false">
+
+	<testsuites>
+		<testsuite name="Respect\Template Unit Test Suite">
+             <directory suffix="Test.php">./library/Respect/Template</directory>
+         </testsuite>
+		<testsuite name="Respect\Template PHPT Test Suite">
+             <directory suffix=".phpt">./examples</directory>
+         </testsuite>
+	</testsuites>
+	
     <filter>
         <whitelist>
-            <directory>../library/</directory>
+            <directory>../library/Respect/Template</directory>
         </whitelist>
     </filter>
 </phpunit>

@@ -11,7 +11,11 @@ use \ArrayAccess;
 
 class Html implements ArrayAccess
 {
-	protected $dom;
+	/**
+	 * @var Respect\Template\Document
+	 */
+	protected $document;
+	
 	protected $data = array();
 	
 	public function __construct($template)
@@ -45,24 +49,6 @@ class Html implements ArrayAccess
 	}
 	
 	/**
-	 * Returns the DOMDocument that will be the result of the templating.
-	 *
-	 * @return DOMDocument
-	 */
-	protected function getDocument()
-	{
-		if (!$this->dom instanceof DOMDocument) {
-			$docId     = "-//W3C//DTD XHTML 1.0 Transitional//EN";
-			$docDtd    = "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd";
-			$dom       = new DOMImplementation();
-			$doctype   = $dom->createDocumentType("html", $docId, $docDtd);
-			$this->dom = $dom->createDocument();
-			$this->dom->formatOutput = true;
-		}
-		return $this->dom;
-	}
-	
-	/**
 	 * Defines the template string or file and parses it with the DOMDocument.
 	 *
 	 * @param 	string 	$mixed	An HTML string or filename
@@ -71,44 +57,38 @@ class Html implements ArrayAccess
 	protected function setTemplate($mixed)
 	{
 		if (file_exists($mixed))
-			return $this->getDocument()->loadHTMLFile($mixed);
-			
-		return $this->getDocument()->loadHTML($mixed);
+			$content = file_get_contents($mixed);
+		else
+			$content = $mixed;
+
+		$this->document = new Document($content);
 	}
 	
-	/**
-	 * Applies the given data to this template.
-	 *
-	 * @param array $data 
-	 */
-	protected function applyData(array $data)
+	protected function decorate(array $data=null)
 	{
-		foreach ($data as $id=>$value) {
-			$element = $this->getDocument()->getElementById($id);
-			if (!$element instanceof DOMNode)
-				throw new Unexpected('Selected element "'.$id.'" is not valid');
-
-			switch (true) {
-				case (is_string($value)):
-					$class = 'Respect\Template\Decorator\Text';
+		$data = $data ?: $this->data;
+		foreach ($data as $selector=>$with) {
+			switch(true) {
+				case (is_string($with)):
+					$class = 'String';
 					break;
-				case (is_array($value)):
-					$class = 'Respect\Template\Decorator\ListItem';
+				case (is_array($with)):
+					$class = 'Traversable';
 					break;
 				default:
-					throw new Unexpected('No decorator set for: '.gettype($value));
+					$type = gettype($with);
+					throw new Unexpected('No decorator set for: '.$type);
 					break;
 			}
-			$decorated = new $class($value, $this->dom);
-			$decorated->appendInto($element);
+			$class = 'Respect\Template\Decorator\\'.$class;
+			$query = new Query($this->document, $selector);
+			new $class($query->getResult(), $with);
 		}
 	}
 	
-	
-	public function render($data=null)
+	public function render($data=null, $beatiful=false)
 	{	
-		$data = $data ?: $this->data ;
-		$this->applyData($data);
-		return $this->getDocument()->saveXML();
+		$this->decorate($data);
+		return $this->document->render($beatiful);
 	}
 }
