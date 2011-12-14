@@ -4,7 +4,7 @@ namespace Respect\Template;
 use \DOMDocument;
 use \DOMImplementation;
 use \DOMXPath;
-use \Zend_Dom_Query;
+use \Zend\Dom\Query as DomQuery;
 /**
  * Normalizes HTMl into a valid DOM XML document.
  *
@@ -63,7 +63,7 @@ class Document
 	public function getQueryDocument()
 	{
 		if (!$this->queryDocument)
-			return $this->queryDocument = new Zend_Dom_Query($this->render());
+			return $this->queryDocument = new DomQuery($this->render());
 
 		return $this->queryDocument;
 	}

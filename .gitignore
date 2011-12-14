@@ -1,4 +1,5 @@
 library/Symfony/
+library/Zend/
 .buildpath
 .project
 .DS_Store

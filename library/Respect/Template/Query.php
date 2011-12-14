@@ -2,7 +2,6 @@
 namespace Respect\Template;
 
 use \DOMXPath;
-use \Zend_Dom_Query;
 
 class Query 
 {
@@ -35,7 +34,7 @@ class Query
 		// Get results by a CSS selector
 		$selector = $this->selector;
 		$document = $this->document->getQueryDocument();
-		$results  = $document->query($selector);
+		$results  = $document->execute($selector);
 		// Return should be an array with DOMElements from the DOMDocument
 		$return   = array();
 		$css      = $results->getCssQuery();
