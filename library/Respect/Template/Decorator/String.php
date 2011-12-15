@@ -11,7 +11,8 @@ class String extends AbstractDecorator
 	{
 		if (!is_string($with))
 			throw new Argument('String required as decorator content');
-
+		
+		new EmptyChildren(array($node));
 		$node->appendChild(new DOMText($with));
 	}
 }

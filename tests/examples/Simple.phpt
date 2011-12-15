@@ -21,5 +21,4 @@ echo $html;
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body><h1>Template Example</h1>
 
-<ul id="items">
-<li>ios</li><li>android</li></ul></body></html>
+<ul id="items"><li>ios</li><li>android</li></ul></body></html>

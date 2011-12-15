@@ -11,6 +11,7 @@ class Traversable extends AbstractDecorator
 		if (!is_array($with))
 			throw new Argument('Traversable decorator requires an array');
 		
+		new EmptyChildren(array($node));
 		$tag = $this->getContainerElement($node);
 		foreach ($with as $element) {
 			$value = (is_array($element)) ? null : $element ;
