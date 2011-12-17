@@ -1,7 +1,6 @@
 <?php
-namespace Respect\Template\Decorator;
-
 use \DOMDocument;
+use Respect\Template\Injector\EmptyChildren;
 
 class EmptyChildrenTest extends \PHPUnit_Framework_TestCase
 {

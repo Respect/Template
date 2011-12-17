@@ -1,18 +1,18 @@
 <?php
-namespace Respect\Template\Decorator;
+namespace Respect\Template\Injector;
 
 use \DOMNode;
 use Respect\Template\Document;
 
-abstract class AbstractDecorator
+abstract class AbstractInjector
 {
 	final public function __construct(array $elements, $with=null)
 	{
 		// Decorate the given elements selected
 		foreach ($elements as $element) {
-			$this->decorate($element, $with);
+			$this->inject($element, $with);
 		}
 	}
 	
-	abstract protected function decorate(DOMNode $node, $with);
+	abstract protected function inject(DOMNode $node, $with);
 }

@@ -1,16 +1,16 @@
 <?php
-namespace Respect\Template\Decorator;
+namespace Respect\Template\Injector;
 
 use \DOMNode;
 use \DOMText;
 use \InvalidArgumentException as Argument;
 
-class String extends AbstractDecorator
+class String extends AbstractInjector
 {
-	protected function decorate(DOMNode $node, $with)
+	protected function inject(DOMNode $node, $with)
 	{
 		if (!is_string($with))
-			throw new Argument('String required as decorator content');
+			throw new Argument('String required as content to inject');
 		
 		new EmptyChildren(array($node));
 		$node->appendChild(new DOMText($with));

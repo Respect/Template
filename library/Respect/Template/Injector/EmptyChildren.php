@@ -1,11 +1,11 @@
 <?php
-namespace Respect\Template\Decorator;
+namespace Respect\Template\Injector;
 
-use DOMNode;
+use \DOMNode;
 
-class EmptyChildren extends AbstractDecorator
+class EmptyChildren extends AbstractInjector
 {
-	protected function decorate(DOMNode $node, $with)
+	protected function inject(DOMNode $node, $with)
 	{
 		$remove = array();
 		foreach ($node->childNodes as $child)

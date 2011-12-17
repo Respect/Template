@@ -1,12 +1,12 @@
 <?php
-namespace Respect\Template\Decorator;
+namespace Respect\Template\Injector;
 
 use \DOMNode;
 use \UnexpectedValueException as Value;
 
-class Traversable extends AbstractDecorator
+class Traversable extends AbstractInjector
 {
-	protected function decorate(DOMNode $node, $with)
+	protected function inject(DOMNode $node, $with)
 	{
 		if (!is_array($with))
 			throw new Argument('Traversable decorator requires an array');
@@ -31,7 +31,14 @@ class Traversable extends AbstractDecorator
 			case 'li':
 				return 'li';
 				break;
-			
+			case 'tbody':
+			case 'table':
+			case 'thead':
+				return 'tr';
+				break;
+			case 'tr':
+				return 'td';
+				break;
 			default:
 				throw new Value('Unknow container element strategy: '.$tag);
 				break;
