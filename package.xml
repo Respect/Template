@@ -51,14 +51,6 @@
         <channel>packages.zendframework.com</channel>
       </package>
     </required>
-    <optional>
-    <group name="doc" hint="Add support for API documentation generation">
-      <package>
-        <name>DocBlox</name>
-        <channel>http://pear.docblox-project.org/</channel>
-      </package>
-    </group>
-    </optional>
   </dependencies>
   <phprelease/>
   <changelog>
