@@ -1,9 +1,9 @@
 <?php
 use \DOMDocument;
 use Respect\Template\Document;
-use Respect\Template\Decorators\String;
-
-class StringTest extends \PHPUnit_Framework_TestCase
+use Respect\Template\Decorators\Append;
+use Respect\Template\Adapter;
+class AppendTest extends \PHPUnit_Framework_TestCase
 {
 	public function strings()
 	{
@@ -24,7 +24,7 @@ class StringTest extends \PHPUnit_Framework_TestCase
 		$doc->appendChild($node);
 		
 		$this->assertFalse($node->hasChildNodes());
-		new String($elements, $with);
+		new Append($elements, Adapter::factory($with));
 		$this->assertTrue($node->hasChildNodes());
 		$this->assertContains($expect, $doc->saveXml());
 	}

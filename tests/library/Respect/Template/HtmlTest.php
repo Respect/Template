@@ -46,12 +46,15 @@ class HtmlTest extends \PHPUnit_Framework_TestCase
 		$this->assertContains($expected, $view->render());
 	}
 	
-	/**
-	 * @expectedException UnexpectedValueException
-	 */
-	public function testNonExistingDecoratorStrategy()
+	public function testArrayAccessInterface()
 	{
-		$parser = new Html('<div id="test"></div>');
-		$parser->render(array('test'=>new Pdo('sqlite::memory:')));
+		$template = new Html('<div id="one"></div>');
+		$this->assertInstanceOf('ArrayAccess', $template);
+		$this->assertFalse(isset($template['one']));
+		$template['one'] = 'one';
+		$this->assertTrue(isset($template['one']));
+		$this->assertEquals('one', $template['one']);
+		unset($template['one']);
+		$this->assertFalse(isset($template['one']));
 	}
 }

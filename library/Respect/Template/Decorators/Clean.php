@@ -3,7 +3,7 @@ namespace Respect\Template\Decorators;
 
 use \DOMNode;
 
-class EmptyChildren extends AbstractDecorator
+class Clean extends AbstractDecorator
 {
 	protected function decorate(DOMNode $node, $with)
 	{

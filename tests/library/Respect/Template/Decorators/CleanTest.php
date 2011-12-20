@@ -1,8 +1,8 @@
 <?php
 use \DOMDocument;
-use Respect\Template\Decorators\EmptyChildren;
+use Respect\Template\Decorators\Clean;
 
-class EmptyChildrenTest extends \PHPUnit_Framework_TestCase
+class CleanTest extends \PHPUnit_Framework_TestCase
 {
 	protected $dom;
 	
@@ -18,7 +18,7 @@ class EmptyChildrenTest extends \PHPUnit_Framework_TestCase
 		$ul->appendChild($li);
 		
 		$this->assertEquals(1, $ul->childNodes->length);
-		new EmptyChildren(array($ul));
+		new Clean(array($ul));
 		$this->assertEquals(0, $ul->childNodes->length);
 	}
 	
@@ -33,7 +33,7 @@ class EmptyChildrenTest extends \PHPUnit_Framework_TestCase
 			$ul->appendChild($this->dom->createElement('li'));
 		
 		$this->assertEquals($expect, $ul->childNodes->length);
-		new EmptyChildren(array($ul));
+		new Clean(array($ul));
 		$this->assertEquals(0, $ul->childNodes->length, $ul->childNodes);
 	}
 	

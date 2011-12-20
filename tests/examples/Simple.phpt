@@ -6,9 +6,7 @@ require 'bootstrap.php';
 $html = <<<HTML
 <h1>This is a Test</h1>
 
-<ul id="items">
-	<li>Item 1</li>
-</ul>
+<ul id="items"><li>Item 1</li></ul>
 HTML;
 $html = new Respect\Template\Html($html);
 $html['h1']     = 'Template Example';

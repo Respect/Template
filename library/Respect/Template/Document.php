@@ -59,24 +59,18 @@ class Document
 	 */
 	public function replaceContentWith(array $data)
 	{
-		$adapters = new Adapter($this);
 		foreach ($data as $selector=>$with) {
 			switch(true) {
-				case (is_string($with)):
-					$class = 'String';
-					break;
 				case (is_array($with)):
-					$class = 'Traversable';
+					$class = 'Replace';
 					break;
 				default:
-					$type = gettype($with);
-					throw new Unexpected('No decorator set for: '.$type);
+					$class = 'Replace';
 					break;
 			}
 			$class = 'Respect\Template\Decorators\\'.$class;
 			$query = new Query($this, $selector);
-			//$with  = $adapters->factory($with);
-			new $class($query, $with);
+			new $class($query, Adapter::factory($with));
 		}
 		return $this;
 	}
