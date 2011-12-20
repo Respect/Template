@@ -1,7 +1,7 @@
 <?php
 use \DOMDocument;
 use Respect\Template\Document;
-use Respect\Template\Injector\String;
+use Respect\Template\Decorators\String;
 
 class StringTest extends \PHPUnit_Framework_TestCase
 {

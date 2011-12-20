@@ -4,6 +4,8 @@ namespace Respect\Template;
 use \DOMDocument;
 use \DOMImplementation;
 use \DOMXPath;
+use \InvalidArgumentException as Argument;
+use \UnexpectedValueException as Unexpected;
 use \Zend\Dom\Query as DomQuery;
 /**
  * Normalizes HTMl into a valid DOM XML document.
@@ -24,12 +26,14 @@ class Document
 	private $queryDocument;
 	
 	/**
-	 * Constructor for document to be queries later on.
-	 *
 	 * @param 	string	$htmlDocument 
 	 */
 	public function __construct($htmlDocument)
 	{
+		$doc       = (string) $htmlDocument;
+		if (empty($doc))
+			throw new Argument('HTML string expected, none given');
+
 		$docId     = "-//W3C//DTD XHTML 1.0 Transitional//EN";
 		$docDtd    = "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd";
 		$dom       = new DOMImplementation();
@@ -38,9 +42,43 @@ class Document
 		$this->dom->loadHtml($htmlDocument);
 	}
 	
+	/**
+	 * @return DOMDocument
+	 */
 	public function getDom()
 	{
 		return $this->dom;
+	}
+	
+	/**
+	 * Replaces this dom content with the given array. 
+	 * The array structure is: $array['Css Selector to Eelement'] = 'content';
+	 * 
+	 * @param 	array 	$data
+	 * @return 	Respect\Template\Document
+	 */
+	public function replaceContentWith(array $data)
+	{
+		$adapters = new Adapter($this);
+		foreach ($data as $selector=>$with) {
+			switch(true) {
+				case (is_string($with)):
+					$class = 'String';
+					break;
+				case (is_array($with)):
+					$class = 'Traversable';
+					break;
+				default:
+					$type = gettype($with);
+					throw new Unexpected('No decorator set for: '.$type);
+					break;
+			}
+			$class = 'Respect\Template\Decorators\\'.$class;
+			$query = new Query($this, $selector);
+			//$with  = $adapters->factory($with);
+			new $class($query, $with);
+		}
+		return $this;
 	}
 	
 	/**

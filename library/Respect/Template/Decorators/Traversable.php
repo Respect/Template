@@ -1,12 +1,12 @@
 <?php
-namespace Respect\Template\Injector;
+namespace Respect\Template\Decorators;
 
 use \DOMNode;
 use \UnexpectedValueException as Value;
-
-class Traversable extends AbstractInjector
+use \InvalidArgumentException as Argument;
+class Traversable extends AbstractDecorator
 {
-	protected function inject(DOMNode $node, $with)
+	protected function decorate(DOMNode $node, $with)
 	{
 		if (!is_array($with))
 			throw new Argument('Traversable decorator requires an array');

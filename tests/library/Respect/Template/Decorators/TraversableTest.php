@@ -1,5 +1,5 @@
 <?php
-use Respect\Template\Decorator\Traversable;
+use Respect\Template\Decorators\Traversable;
 use \DOMDocument;
 use \DOMNode;
 class TraversableTest extends \PHPUnit_Framework_TestCase
@@ -19,6 +19,15 @@ class TraversableTest extends \PHPUnit_Framework_TestCase
 		);
 	}
 	
+	public function strings()
+	{
+		// Elements: tag, injector, final string 
+		return array(
+			array('ul', array(array('one', 'two')), '<li>one</li><li>two</li>'),
+			array('table', array(array('one', 'two')), '<tr><td>one</td><td>two</td></tr>'),
+		);
+	}
+	
 	protected function assertContainTraversables($traversables)
 	{
 		$xml = $this->dom->saveXml();
@@ -33,7 +42,7 @@ class TraversableTest extends \PHPUnit_Framework_TestCase
 	/**
 	 * @dataProvider traversables
 	 */
-	public function testListDecorator($with)
+	public function testInjectingOnAUl($with)
 	{
 		$ul = $this->dom->createElement('ul');
 		$this->dom->appendChild($ul);
@@ -43,15 +52,17 @@ class TraversableTest extends \PHPUnit_Framework_TestCase
 		$this->assertContainTraversables($with);
 	}
 	
-	public function testFinalString()
+	/**
+	 * @dataProvider strings
+	 */
+	public function testFinalResultWithInjector($tag, $injector, $finalString)
 	{
-		$ul = $this->dom->createElement('ul');
-		$this->dom->appendChild($ul);
-		$this->assertFalse($ul->hasChildNodes());
-		new Traversable(array($ul), array('one', 'two'));
-		$this->assertTrue($ul->hasChildNodes());
-		$expect = '<li>one</li><li>two</li>';
-		$this->assertContains($expect, $this->dom->saveXml());
+		$node = $this->dom->createElement($tag);
+		$this->dom->appendChild($node);
+		$this->assertFalse($node->hasChildNodes());
+		new Traversable(array($node), $injector);
+		$this->assertTrue($node->hasChildNodes());
+		$this->assertContains($finalString, $this->dom->saveXml());
 	}
 	
 	/**
