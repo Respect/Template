@@ -24,7 +24,7 @@ class AppendTest extends \PHPUnit_Framework_TestCase
 		$doc->appendChild($node);
 		
 		$this->assertFalse($node->hasChildNodes());
-		new Append($elements, Adapter::factory($with));
+		new Append($elements, Adapter::factory($doc, $with));
 		$this->assertTrue($node->hasChildNodes());
 		$this->assertContains($expect, $doc->saveXml());
 	}

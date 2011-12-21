@@ -32,7 +32,7 @@ class Adapter_TraversableTest extends \PHPUnit_Framework_TestCase
 		$this->dom->appendChild($ul);
 		
 		$array   = array('one', 'two', 'three');
-		$adapter = new Traversable();
+		$adapter = new Traversable($this->dom);
 		$this->assertTrue($adapter->isValidData($array));
 		$adapted = $adapter->adaptTo($ul, $array);
 		$ul->appendChild($adapted);
@@ -64,7 +64,7 @@ class Adapter_TraversableTest extends \PHPUnit_Framework_TestCase
 		$this->dom->appendChild($node);
 		
 		$this->assertFalse($node->hasChildNodes());
-		$adapter = new Traversable();
+		$adapter = new Traversable($this->dom);
 		$node->appendChild($adapter->adaptTo($node, $injector));
 		$this->assertTrue($node->hasChildNodes());
 		$this->assertContains($finalString, $this->dom->saveXml());

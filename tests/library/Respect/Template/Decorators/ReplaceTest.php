@@ -20,7 +20,7 @@ class Decorator_ReplaceTest extends \PHPUnit_Framework_TestCase
 		$div  = $this->dom->createElement('div', 'it does not matter');
 		$span = $this->dom->createElement('span', 'it matters');
 		$this->dom->appendChild($div);
-		new Decorator($div, Adapter::factory($span));
+		new Decorator($div, Adapter::factory($this->dom, $span));
 		$this->assertContains('<span>it matters</span>', $this->dom->saveXML());
 	}
 }

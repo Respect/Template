@@ -3,6 +3,7 @@ namespace Respect\Template;
 
 use Respect\Template\Adapters\AbstractAdapter;
 use \DOMNode;
+use \DOMDocument;
 use \UnexpectedValueException as Unexpected;
 class Adapter
 {
@@ -26,19 +27,19 @@ class Adapter
 		return self::$instance = new Adapter();
 	}
 	
-	public static function factory($content)
+	public static function factory(DOMDocument $dom, $content)
 	{
-		return self::getInstance()->_factory($content);
+		return self::getInstance()->_factory($dom, $content);
 	}
 	
-	public function _factory($content)
+	public function _factory(DOMDocument $dom, $content)
 	{
 		if ($content instanceof AbstractAdapter)
 			return $content;
 		
 		foreach ($this->adapters as $class=>$object)
 			if ($object->isValidData($content))
-				return new $class($content);
+				return new $class($dom, $content);
 		
 		$type  = gettype($content);
 		$type .= (!is_object($type)) ? '' : ' of class '.get_class($content);

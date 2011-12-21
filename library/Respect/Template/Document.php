@@ -60,7 +60,7 @@ class Document
 	public function decorate(array $data, $decorator = 'Replace')
 	{
 		foreach ($data as $selector=>$with) {
-			$adapter   = Adapter::factory($with);
+			$adapter   = Adapter::factory($this->getDom(), $with);
 			$decorator = $adapter->getDecorator();
 			$query     = new Query($this, $selector);
 			new $decorator($query, $adapter);

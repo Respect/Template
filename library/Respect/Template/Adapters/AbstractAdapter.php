@@ -2,14 +2,20 @@
 namespace Respect\Template\Adapters;
 
 use \DOMNode;
+use \DOMDocument;
 use \UnexpectedValueException as Unexpected;
 
 abstract class AbstractAdapter
 {	
+	/**
+	 * @var DOMDocument
+	 */
+	protected $dom;
 	protected $content;
 	
-	public function __construct($content=null)
+	public function __construct(DOMDocument $dom=null, $content=null)
 	{
+		$this->dom = $dom;
 		if (!is_null($content))
 			$this->content=$content;
 	}
@@ -19,13 +25,16 @@ abstract class AbstractAdapter
 	
 	protected function createElement(DOMNode $parent, $name, $value=null)
 	{
-		return $parent->ownerDocument->createElement($name, $value);
+		if (!$this->dom instanceof DOMDocument)
+			throw new Unexpected('No DOMDocument, cannot create new element');
+		
+		return $this->dom->createElement($name, $value);
 	}
 	
 	final protected function hasProperty($data, $name)
 	{
 		if (is_array($data))
-			return isset($data['$name']);
+			return isset($data[$name]);
 		if (is_object($data))
 			return isset($data->$name);
 		return false;
@@ -34,7 +43,7 @@ abstract class AbstractAdapter
 	final protected function getProperty($data, $name)
 	{
 		if (is_array($data))
-			return $data['$name'];
+			return $data[$name];
 		if (is_object($data))
 			return $data->$name;
 		return null;

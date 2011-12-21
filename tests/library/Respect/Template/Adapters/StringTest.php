@@ -22,7 +22,7 @@ class Adapter_StringTest extends \PHPUnit_Framework_TestCase
 		$this->dom->appendChild($div);
 		
 		$string  = 'This is a simple string';
-		$adapter = new String();
+		$adapter = new String($this->dom);
 		$this->assertTrue($adapter->isValidData($string));
 		$adapted = $adapter->adaptTo($div, $string);
 		$div->appendChild($adapted);

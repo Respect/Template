@@ -31,7 +31,7 @@ class ReplaceTest extends \PHPUnit_Framework_TestCase
 		
 		
 		$this->assertTrue($ul->hasChildNodes());
-		new Decorator(array($ul), Adapter::factory($with));
+		new Decorator(array($ul), Adapter::factory($this->dom, $with));
 		$this->assertTrue($ul->hasChildNodes());
 	}
 }
