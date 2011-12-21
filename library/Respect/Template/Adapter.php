@@ -1,6 +1,8 @@
 <?php
 namespace Respect\Template;
 
+use Respect\Template\Adapters\AbstractAdapter;
+use \DOMNode;
 use \UnexpectedValueException as Unexpected;
 class Adapter
 {
@@ -31,11 +33,15 @@ class Adapter
 	
 	public function _factory($content)
 	{
+		if ($content instanceof AbstractAdapter || $content instanceof DOMNode)
+			return $content;
+		
 		foreach ($this->adapters as $class=>$object)
 			if ($object->isValidData($content))
 				return new $class($content);
 		
-		$type = gettype($content);
-		throw new Unexpected('No adapter found for '.$content);
+		$type  = gettype($content);
+		$type .= (!is_object($type)) ? '' : ' of class '.get_class($content);
+		throw new Unexpected('No adapter found for '.$type);
 	}
 }
