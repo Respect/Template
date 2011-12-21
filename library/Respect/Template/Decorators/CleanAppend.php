@@ -4,7 +4,8 @@ namespace Respect\Template\Decorators;
 use \DOMNode;
 use \UnexpectedValueException as Value;
 use \InvalidArgumentException as Argument;
-class Replace extends AbstractDecorator
+
+class CleanAppend extends AbstractDecorator
 {
 	protected function decorate(DOMNode $node, $with)
 	{

@@ -1,5 +1,5 @@
 <?php
-use Respect\Template\Decorators\Replace;
+use Respect\Template\Decorators\CleanAppend as Decorator;
 use Respect\Template\Adapter;
 use \DOMDocument;
 use \DOMNode;
@@ -31,7 +31,7 @@ class ReplaceTest extends \PHPUnit_Framework_TestCase
 		
 		
 		$this->assertTrue($ul->hasChildNodes());
-		new Replace(array($ul), Adapter::factory($with));
+		new Decorator(array($ul), Adapter::factory($with));
 		$this->assertTrue($ul->hasChildNodes());
 	}
 }

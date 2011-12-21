@@ -45,4 +45,9 @@ abstract class AbstractAdapter
 		$content = ($content) ? $content : $this->content;
 		return $this->getDomNode($content, $parent);
 	}
+	
+	public function getDecorator()
+	{
+		return 'Respect\Template\Decorators\CleanAppend';
+	}
 }
