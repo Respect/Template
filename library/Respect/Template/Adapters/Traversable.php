@@ -20,7 +20,7 @@ class Traversable extends AbstractAdapter
 			$child  = $this->createElement($parent, $tag, $value);
 			$container->appendChild($child);
 			if (is_array($analyse))
-				$this->getDomNode($analyse, $child);
+				$child->appendChild($this->getDomNode($analyse, $child));
 		}
 		return $container;
 	}

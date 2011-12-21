@@ -50,7 +50,7 @@ class Adapter_TraversableTest extends \PHPUnit_Framework_TestCase
 		// Elements: tag, injector, final string 
 		return array(
 			array('ul', array('one', 'two'), '<li>one</li><li>two</li>'),
-			array('table', array(array('one', 'two')), '<tr><td>one</td><td>two</td></tr>'),
+			array('table', array(array('1', '2')), '<tr><td>1</td><td>2</td></tr>'),
 		);
 	}
 	
@@ -60,7 +60,6 @@ class Adapter_TraversableTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testMultipleAdaptations($tag, $injector, $finalString)
 	{
-		$this->markTestSkipped('Correct recursion problem in adapter');
 		$node = $this->dom->createElement($tag);
 		$this->dom->appendChild($node);
 		
