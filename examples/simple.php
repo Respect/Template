@@ -1,8 +1,8 @@
 <?php
 require '../tests/bootstrap.php';
 
-$view = new Respect\Template\Parser('./template.html');
-$data = array(
-	'names' => array('Santa', 'Pippin', 'Freakazoid')
-);
-echo $view->render($data);
+
+$template = new Respect\Template\Html('./template.html');
+$template['body > h1'] = 'Hello World';
+$template['#names']    = array('Pascutti', 'Moody', 'Ferreira', 'Gaigalas');
+echo $template->render();
