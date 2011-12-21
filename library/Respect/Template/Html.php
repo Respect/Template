@@ -66,6 +66,6 @@ class Html implements ArrayAccess
 	public function render($data=null, $beatiful=false)
 	{	
 		$data = $data ?: $this->data;
-		return $this->document->replaceContentWith($data)->render($beatiful);
+		return $this->document->decorate($data)->render($beatiful);
 	}
 }

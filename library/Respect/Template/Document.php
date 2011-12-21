@@ -57,18 +57,10 @@ class Document
 	 * @param 	array 	$data
 	 * @return 	Respect\Template\Document
 	 */
-	public function replaceContentWith(array $data)
+	public function decorate(array $data, $decorator = 'Replace')
 	{
 		foreach ($data as $selector=>$with) {
-			switch(true) {
-				case (is_array($with)):
-					$class = 'Replace';
-					break;
-				default:
-					$class = 'Replace';
-					break;
-			}
-			$class = 'Respect\Template\Decorators\\'.$class;
+			$class = 'Respect\Template\Decorators\\'.$decorator;
 			$query = new Query($this, $selector);
 			new $class($query, Adapter::factory($with));
 		}
