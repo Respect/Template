@@ -22,7 +22,7 @@ abstract class AbstractAdapter
 		return $parent->ownerDocument->createElement($name, $value);
 	}
 	
-	protected function hasProperty($data, $name)
+	final protected function hasProperty($data, $name)
 	{
 		if (is_array($data))
 			return isset($data['$name']);
@@ -31,7 +31,7 @@ abstract class AbstractAdapter
 		return false;
 	}
 	
-	protected function getProperty($data, $name)
+	final protected function getProperty($data, $name)
 	{
 		if (is_array($data))
 			return $data['$name'];

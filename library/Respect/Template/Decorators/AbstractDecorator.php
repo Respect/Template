@@ -12,15 +12,19 @@ abstract class AbstractDecorator
 {
 	final public function __construct($elements, Adapter $with=null)
 	{
+		if ($elements instanceof DOMNode)
+			$elements = array($elements);
+
 		if ($elements instanceof Query)
 			$elements = $elements->getResult();
+		
 		if (!is_array($elements))
-			throw new Argument('Query or Array expected as elements to decorate');
+			throw new Argument('Query or Array expected to decorate');
 		
 		// Decorate the given elements selected
 		foreach ($elements as $element) {
 			if (!$element instanceof DOMNode)
-				throw new Unexpected('DOMNode expected in elements to decorate');
+				throw new Unexpected('DOMNode expected for decoration');
 			
 			if (!is_null($with))
 				$with = $with->adaptTo($element);
@@ -28,5 +32,5 @@ abstract class AbstractDecorator
 		}
 	}
 	
-	abstract protected function decorate(DOMNode $node, $with);
+	abstract protected function decorate(DOMNode $node, DOMNode $with=null);
 }

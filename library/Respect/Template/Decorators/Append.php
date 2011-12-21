@@ -7,7 +7,7 @@ use \InvalidArgumentException as Argument;
 
 class Append extends AbstractDecorator
 {
-	protected function decorate(DOMNode $node, $with)
+	protected function decorate(DOMNode $node, DOMNode $with=null)
 	{
 		$node->appendChild($with);
 	}

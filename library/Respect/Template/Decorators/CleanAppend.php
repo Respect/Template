@@ -7,7 +7,7 @@ use \InvalidArgumentException as Argument;
 
 class CleanAppend extends AbstractDecorator
 {
-	protected function decorate(DOMNode $node, $with)
+	protected function decorate(DOMNode $node, DOMNode $with=null)
 	{
 		new Clean(array($node));
 		$node->appendChild($with);

@@ -11,7 +11,7 @@ class Adapter
 	
 	private function __construct()
 	{
-		$adapters       = array('A', 'Traversable', 'String');
+		$adapters       = array('A', 'Dom', 'Traversable', 'String');
 		foreach ($adapters as $className) {
 			$class                  = 'Respect\Template\Adapters\\'.$className;
 			$this->adapters[$class] = new $class();
@@ -33,7 +33,7 @@ class Adapter
 	
 	public function _factory($content)
 	{
-		if ($content instanceof AbstractAdapter || $content instanceof DOMNode)
+		if ($content instanceof AbstractAdapter)
 			return $content;
 		
 		foreach ($this->adapters as $class=>$object)
