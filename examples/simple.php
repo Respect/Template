@@ -1,8 +1,9 @@
 <?php
+namespace Respect\Template;
 require '../tests/bootstrap.php';
 
-
-$template = new Respect\Template\Html('./template.html');
-$template['body > h1'] = 'Hello World';
-$template['#names']    = array('Pascutti', 'Moody', 'Ferreira', 'Gaigalas');
+$template              = new Html('./cssZenGarden.html');
+$template['title']     = 'Respect\Template: A different template engine';
+$template['#pageHeader h1'] = 'Respect\Template';
+$template['#pageHeader h2'] = 'A different template engine';
 echo $template->render();
