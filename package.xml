@@ -16,11 +16,11 @@
     <email>alexandre@gaigalas.net</email>
     <active>yes</active>
   </developer>
-  <date>2011-12-14</date>
-  <time>18:47:29</time>
+  <date>2011-12-23</date>
+  <time>19:10:47</time>
   <version>
-    <release>0.1.3</release>
-    <api>0.1.3</api>
+    <release>0.1.4</release>
+    <api>0.1.4</api>
   </version>
   <stability>
     <release>alpha</release>
@@ -29,13 +29,22 @@
   <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD Style</license>
   <notes>-</notes>
   <contents>
-    <dir name="library/Respect/Template" baseinstalldir="Respect/Template">
-      <file role="php" baseinstalldir="Respect/Template" install-as="/Decorator/AbstractDecorator.php" name="library/Respect/Template/Decorator/AbstractDecorator.php"/>
-      <file role="php" baseinstalldir="Respect/Template" install-as="/Decorator/String.php" name="library/Respect/Template/Decorator/String.php"/>
-      <file role="php" baseinstalldir="Respect/Template" install-as="/Decorator/Traversable.php" name="library/Respect/Template/Decorator/Traversable.php"/>
-      <file role="php" baseinstalldir="Respect/Template" install-as="/Document.php" name="library/Respect/Template/Document.php"/>
-      <file role="php" baseinstalldir="Respect/Template" install-as="/Html.php" name="library/Respect/Template/Html.php"/>
-      <file role="php" baseinstalldir="Respect/Template" install-as="/Query.php" name="library/Respect/Template/Query.php"/>
+    <dir name="/" baseinstalldir="Respect/Template">
+      <file role="php" baseinstalldir="Respect/Template" name="library/Respect/Template/Adapter.php"/>
+      <file role="php" baseinstalldir="Respect/Template" name="library/Respect/Template/Adapters/A.php"/>
+      <file role="php" baseinstalldir="Respect/Template" name="library/Respect/Template/Adapters/AbstractAdapter.php"/>
+      <file role="php" baseinstalldir="Respect/Template" name="library/Respect/Template/Adapters/Dom.php"/>
+      <file role="php" baseinstalldir="Respect/Template" name="library/Respect/Template/Adapters/String.php"/>
+      <file role="php" baseinstalldir="Respect/Template" name="library/Respect/Template/Adapters/Traversable.php"/>
+      <file role="php" baseinstalldir="Respect/Template" name="library/Respect/Template/Decorators/AbstractDecorator.php"/>
+      <file role="php" baseinstalldir="Respect/Template" name="library/Respect/Template/Decorators/Append.php"/>
+      <file role="php" baseinstalldir="Respect/Template" name="library/Respect/Template/Decorators/Clean.php"/>
+      <file role="php" baseinstalldir="Respect/Template" name="library/Respect/Template/Decorators/CleanAppend.php"/>
+      <file role="php" baseinstalldir="Respect/Template" name="library/Respect/Template/Decorators/Replace.php"/>
+      <file role="php" baseinstalldir="Respect/Template" name="library/Respect/Template/Document.php"/>
+      <file role="php" baseinstalldir="Respect/Template" name="library/Respect/Template/Html.php"/>
+      <file role="php" baseinstalldir="Respect/Template" name="library/Respect/Template/HtmlElement.php"/>
+      <file role="php" baseinstalldir="Respect/Template" name="library/Respect/Template/Query.php"/>
     </dir>
   </contents>
   <dependencies>
@@ -52,7 +61,25 @@
       </package>
     </required>
   </dependencies>
-  <phprelease/>
+  <phprelease>
+    <filelist>
+      <install as="/Adapter.php" name="library/Respect/Template/Adapter.php"/>
+      <install as="/Adapters/A.php" name="library/Respect/Template/Adapters/A.php"/>
+      <install as="/Adapters/AbstractAdapter.php" name="library/Respect/Template/Adapters/AbstractAdapter.php"/>
+      <install as="/Adapters/Dom.php" name="library/Respect/Template/Adapters/Dom.php"/>
+      <install as="/Adapters/String.php" name="library/Respect/Template/Adapters/String.php"/>
+      <install as="/Adapters/Traversable.php" name="library/Respect/Template/Adapters/Traversable.php"/>
+      <install as="/Decorators/AbstractDecorator.php" name="library/Respect/Template/Decorators/AbstractDecorator.php"/>
+      <install as="/Decorators/Append.php" name="library/Respect/Template/Decorators/Append.php"/>
+      <install as="/Decorators/Clean.php" name="library/Respect/Template/Decorators/Clean.php"/>
+      <install as="/Decorators/CleanAppend.php" name="library/Respect/Template/Decorators/CleanAppend.php"/>
+      <install as="/Decorators/Replace.php" name="library/Respect/Template/Decorators/Replace.php"/>
+      <install as="/Document.php" name="library/Respect/Template/Document.php"/>
+      <install as="/Html.php" name="library/Respect/Template/Html.php"/>
+      <install as="/HtmlElement.php" name="library/Respect/Template/HtmlElement.php"/>
+      <install as="/Query.php" name="library/Respect/Template/Query.php"/>
+    </filelist>
+  </phprelease>
   <changelog>
     <release>
       <version>
@@ -64,6 +91,9 @@
         <api>alpha</api>
       </stability>
       <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD Style</license>
+      <date>2009-09-09</date>
+      <time>09:09:09</time>
+      <notes>This release date and time might be innacurate.</notes>
     </release>
     <release>
       <version>
@@ -75,6 +105,9 @@
         <api>alpha</api>
       </stability>
       <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD Style</license>
+      <date>2009-09-09</date>
+      <time>09:09:09</time>
+      <notes>This release date and time might be innacurate.</notes>
     </release>
     <release>
       <version>
@@ -86,6 +119,9 @@
         <api>alpha</api>
       </stability>
       <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD Style</license>
+      <date>2009-09-09</date>
+      <time>09:09:09</time>
+      <notes>This release date and time might be innacurate.</notes>
     </release>
     <release>
       <version>
@@ -97,6 +133,23 @@
         <api>alpha</api>
       </stability>
       <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD Style</license>
+      <date>2009-09-09</date>
+      <time>09:09:09</time>
+      <notes>This release date and time might be innacurate.</notes>
+    </release>
+    <release>
+      <version>
+        <release>0.1.4</release>
+        <api>0.1.4</api>
+      </version>
+      <stability>
+        <release>alpha</release>
+        <api>alpha</api>
+      </stability>
+      <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD Style</license>
+      <date>2011-12-23</date>
+      <time>19:10:47</time>
+      <notes>-</notes>
     </release>
   </changelog>
 </package>
