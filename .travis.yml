@@ -6,5 +6,5 @@ php:
   - 5.4
 
 before_script: 
-  - "sudo pyrus channel-disover packages.zendframework.com"
+  - "sudo pyrus channel-discover packages.zendframework.com"
   - "sudo make travis"
