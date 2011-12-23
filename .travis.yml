@@ -7,4 +7,5 @@ php:
 
 before_script: 
   - "sudo pyrus channel-discover packages.zendframework.com"
+  - "sudo pyrus channel-discover respect.li/pear"
   - "sudo make travis"
