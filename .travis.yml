@@ -7,5 +7,5 @@ php:
 
 before_script: 
   - "sudo pyrus channel-discover packages.zendframework.com"
-  - "sudo pyrus install packages.zendframework.com/Zend_Dom"
+  - "sudo pyrus install packages.zendframework.com/Zend_Dom-beta"
   - "phpenv rehash"
