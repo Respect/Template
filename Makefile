@@ -9,6 +9,7 @@ help:
 	@echo "test\t\t Run all tests"
 	@echo "coverage\t Run all tests and write HTML coverage reports"
 	@echo "dev\t\t Install the necessary packages to develop this project"
+	@echo "dev-travis\t Install the necessary packages to run this on Travis CI"
 	@echo "patch\t\t Updates the package.xml and increments the patch revision number (1.1.x)"
 	@echo "minor\t\t Updates the package.xml and increments the minor revision number (1.x.0)"
 	@echo "major\t\t Updates the package.xml and increments the major revision number (x.0.0)"
@@ -32,6 +33,10 @@ dev:
 	pear install --soft --force pear.phpunit.de/PHPUnit 
 	pear install --soft --force pear.pirum-project.org/Pirum
 	pear install --soft --force --alldeps -o package.xml 
+
+travis: 
+	@echo "Installing Pyrus packages... (please run as root if needed)"
+	pyrus install -f -o package.xml 
 
 patch:
 	@echo "Generating package.xml patch version"

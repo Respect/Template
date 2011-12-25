@@ -1,10 +1,11 @@
 language: php
-script: make test
+script: "cd tests;phpunit library"
 
 php:
   - 5.3
   - 5.4
 
 before_script: 
-  - "sudo apt-get install -y php-pear"
-  - "sudo make dev"
+  - "sudo pyrus channel-discover packages.zendframework.com"
+  - "sudo pyrus install packages.zendframework.com/Zend_Dom-beta"
+  - "phpenv rehash"
