@@ -1,6 +1,6 @@
 <?php
+use \DOMDocument;
 use Respect\Template\HtmlElement as H;
-
 class HtmlElementTest extends \PHPUnit_Framework_TestCase
 {
 	public function setUp()
@@ -34,4 +34,15 @@ class HtmlElementTest extends \PHPUnit_Framework_TestCase
 			  );
 		$this->assertEquals('<ul><li>one</li><li>two</li></ul>', (string) $ul);
 	}
+    
+    public function testGetDomNode()
+    {
+        $dom = new DOMDocument('1.0', 'iso-8859-1');
+        $ul  = $dom->createElement('ul');
+        $ul->appendChild($dom->createElement('li', 'one'));
+        $ul->appendChild($dom->createElement('li', 'two'));
+        
+        $_ul = H::ul(H::li('one'), H::li('two'));
+        $this->assertEquals($ul, $_ul->getDOMNode($dom));
+    }
 }

@@ -19,7 +19,7 @@ class A extends AbstractAdapter
 		$element->setAttribute('href', $this->getProperty($data, 'href'));
 		if ($this->hasProperty($data, 'innerHtml')) {
 			$inner   = $this->getProperty($data, 'innerHtml');
-			$adapter = Adapter::factory($this->dom, $inner);
+			$adapter = Adapter::factory($this->getDom(), $inner);
 			new Append($element, $adapter);
 		}
 		return $element;

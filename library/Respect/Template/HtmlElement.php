@@ -1,6 +1,8 @@
 <?php
 namespace Respect\Template;
 
+use \DOMText;
+use \DOMDocument;
 class HtmlElement
 {
     protected $nodeName      = '';
@@ -35,5 +37,24 @@ class HtmlElement
             return "<{$this->nodeName}{$attrs}>$children</{$this->nodeName}>";
         
         return "<{$this->nodeName}{$attrs} />";
+    }
+    
+    public function getDOMNode(DOMDocument $dom, $current=null)
+    {
+        if (is_string($current))
+            return new DOMText($current);
+
+        $current = $current ?: $this ;
+        $node    = $dom->createElement($current->nodeName);
+        foreach ($current->attributes as $name=>$value)
+            $node->setAttribute($name, $value);
+        
+        if (!count($current->childrenNodes))
+            return $node;
+        
+        foreach ($current->childrenNodes as $child)
+            $node->appendChild($this->getDOMNode($dom, $child));
+
+        return $node;
     }
 }

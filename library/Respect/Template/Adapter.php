@@ -12,7 +12,7 @@ class Adapter
 	
 	private function __construct()
 	{
-		$adapters       = array('A', 'Dom', 'Traversable', 'String');
+		$adapters       = array('HtmlElement', 'A', 'Dom', 'Traversable', 'String');
 		foreach ($adapters as $className) {
 			$class                  = 'Respect\Template\Adapters\\'.$className;
 			$this->adapters[$class] = new $class();

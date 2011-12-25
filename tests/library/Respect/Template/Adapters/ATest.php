@@ -1,4 +1,5 @@
 <?php
+use \StdClass;
 use Respect\Template\Adapters\A as Adapter;
 use Respect\Template\Adapter as A;
 
@@ -32,4 +33,20 @@ class Adapter_ATest extends PHPUnit_Framework_TestCase
 		$this->assertTrue($to->hasAttribute('href'));
 		$this->assertEquals($href, $to->getAttribute('href'));
 	}
+    
+    public function testAdaptationWithInnerHtml()
+    {
+        $std            = new StdClass();
+        $std->href      = '#top';
+        $std->innerHtml = 'Top';
+        $adapter        = A::factory($this->dom, $std);
+        $this->assertInstanceOf('Respect\Template\Adapters\A', $adapter);
+        $to             = $adapter->adaptTo($this->dom);
+        $this->assertInstanceOf('DOMElement', $to);
+        $this->assertTrue($to->hasAttribute('href'));
+        
+        $expected       = $this->dom->createElement('a', 'Top');
+        $expected->setAttribute('href', '#top');
+        $this->assertEquals($expected, $to);
+    }
 }

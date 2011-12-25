@@ -51,6 +51,7 @@ class Adapter_TraversableTest extends \PHPUnit_Framework_TestCase
 		return array(
 			array('ul', array('one', 'two'), '<li>one</li><li>two</li>'),
 			array('table', array(array('1', '2')), '<tr><td>1</td><td>2</td></tr>'),
+            array('h1', array('hi'), '<h1><span>hi</span></h1>')
 		);
 	}
 	

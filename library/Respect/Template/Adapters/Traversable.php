@@ -42,7 +42,7 @@ class Traversable extends AbstractAdapter
 				return 'td';
 				break;
 			default:
-				return 'div';
+				return 'span';
 				break;
 		}
 	}

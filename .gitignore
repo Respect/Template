@@ -3,6 +3,7 @@ library/Zend/
 .buildpath
 .project
 .DS_Store
+.tm_properties
 .settings/
 .foundation-tmp
 phar

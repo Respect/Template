@@ -43,7 +43,7 @@ class HtmlTest extends \PHPUnit_Framework_TestCase
 			$view[$key] = $val;
 		
 		$this->assertAttributeEquals($data, 'data', $view, 'ArrayAccess did not work to set data for template');
-		$this->assertContains($expected, $view->render());
+		$this->assertContains($expected, (string) $view);
 	}
 	
 	public function testArrayAccessInterface()

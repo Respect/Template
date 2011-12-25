@@ -54,14 +54,15 @@ class Document
 	 * Replaces this dom content with the given array. 
 	 * The array structure is: $array['Css Selector to Eelement'] = 'content';
 	 * 
-	 * @param 	array 	$data
+	 * @param 	array 	            $data
+	 * @param   string[optional]    $decorator  Class to be used as decorator
 	 * @return 	Respect\Template\Document
 	 */
-	public function decorate(array $data, $decorator = 'Replace')
+	public function decorate(array $data, $decorator = null)
 	{
 		foreach ($data as $selector=>$with) {
 			$adapter   = Adapter::factory($this->getDom(), $with);
-			$decorator = $adapter->getDecorator();
+			$decorator = $decorator ?: $adapter->getDecorator();
 			$query     = new Query($this, $selector);
 			new $decorator($query, $adapter);
 		}
