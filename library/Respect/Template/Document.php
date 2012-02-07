@@ -6,7 +6,7 @@ use \DOMImplementation;
 use \DOMXPath;
 use \InvalidArgumentException as Argument;
 use \UnexpectedValueException as Unexpected;
-use \Zend\Dom\Query as DomQuery;
+use Zend\Dom\Query as DomQuery;
 /**
  * Normalizes HTMl into a valid DOM XML document.
  *
