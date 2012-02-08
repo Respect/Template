@@ -66,9 +66,9 @@ class Document
 	 *
 	 * @return 	string
 	 */
-	public function render($beatiful=false)
+	public function render($beautiful=false)
 	{
-		$this->dom->formatOutput = $beatiful;
+		$this->dom->formatOutput = $beautiful;
 		return $this->dom->saveHTML();
 	}
 	
