@@ -7,15 +7,14 @@ use \DOMImplementation;
 use \DOMDocument;
 use \DOMText;
 use \DOMNode;
-use \ArrayAccess;
+use \ArrayObject;
 
-class Html implements ArrayAccess
+class Html extends ArrayObject
 {
 	/**
 	 * @var Respect\Template\Document
 	 */
 	protected $document;
-	protected $data = array();
 	
 	public function __construct($templateFileOrString)
 	{
@@ -25,26 +24,6 @@ class Html implements ArrayAccess
 	public function __toString()
 	{
 		return $this->render();
-	}
-	
-	public function offsetExists($offset)
-	{
-		return isset($this->data[$offset]);
-	}
-	
-	public function offsetGet($offset)
-	{
-		return $this->data[$offset];
-	}
-	
-	public function offsetSet($offset, $value)
-	{
-		$this->data[$offset] = $value;
-	}
-	
-	public function offsetUnset($offset)
-	{
-		unset($this->data[$offset]);
 	}
 	
 	/**
@@ -65,7 +44,7 @@ class Html implements ArrayAccess
 	
 	public function render($data=null, $beatiful=false)
 	{	
-		$data = $data ?: $this->data;
+		$data = $data ?: $this->getArrayCopy();
 		return $this->document->decorate($data)->render($beatiful);
 	}
 }

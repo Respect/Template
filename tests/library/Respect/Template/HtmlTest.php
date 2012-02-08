@@ -36,13 +36,13 @@ class HtmlTest extends \PHPUnit_Framework_TestCase
 	 * @depends testPassingDataToRender
 	 * @dataProvider constructs
 	 */
-	public function testTemplateWithArrayAccess($template, $data, $expected)
+	public function testTemplateWithArrayObject($template, $data, $expected)
 	{
 		$view = new Html($template);
 		foreach ($data as $key=>$val)
 			$view[$key] = $val;
 		
-		$this->assertAttributeEquals($data, 'data', $view, 'ArrayAccess did not work to set data for template');
+		$this->assertEquals($data, $view->getArrayCopy(), 'ArrayObject did not work to set data for template');
 		$this->assertContains($expected, (string) $view);
 	}
 	
