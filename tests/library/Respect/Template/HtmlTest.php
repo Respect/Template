@@ -57,4 +57,13 @@ class HtmlTest extends \PHPUnit_Framework_TestCase
 		unset($template['one']);
 		$this->assertFalse(isset($template['one']));
 	}
+
+	public function testResolveAliases()
+	{
+		$v = new Html("<!DOCTYPE html>\n<html><body><h1><span></span></h1></body></html>\n");
+		$v->aliasFor["h1 > span"] = "pagetitle";
+		$v["pagetitle"] = "FooBar";
+		$this->assertEquals("<!DOCTYPE html>\n<html><body><h1><span>FooBar</span></h1></body></html>\n", (string) $v);
+	}
+
 }
