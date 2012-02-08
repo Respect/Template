@@ -26,6 +26,29 @@ class Html extends ArrayObject
 	{
 		return $this->render();
 	}
+
+	public function inheritFrom(Html $model, $blockSelector, $anotherSelector=null, $etc=null)
+	{
+		$selectors = array_slice(func_get_args(), 1);
+		foreach ($selectors as $selector)
+			foreach ($model->find($selector) as $modelNode)
+				foreach ($this->find($selector) as $targetNode)
+					$targetNode->parentNode->replaceChild(
+						$this->document->getDom()->importNode($modelNode, true),
+						$targetNode
+					);
+	}
+
+	public function getDocument()
+	{
+		return $this->document;
+	}
+
+	public function find($selector)
+	{
+		$query = new Query($this->document, $selector);
+		return $query->getResult();
+	}
 	
 	/**
 	 * Defines the template string or file and parses it with the DOMDocument.

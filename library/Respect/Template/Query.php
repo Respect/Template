@@ -35,9 +35,6 @@ class Query
 		$selector = $this->selector;
 		$document = $this->document->getQueryDocument();
 		$results  = $document->execute($selector);
-		// Return should be an array with DOMElements from the DOMDocument
-		$return   = array();
-		$css      = $results->getCssQuery();
 		$xpath    = $results->getXpathQuery();
 		$domxpath = new DOMXPath($this->document->getDom());
 		$nodelist = iterator_to_array($domxpath->query($xpath));

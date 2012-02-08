@@ -31,6 +31,7 @@ class Document
 	public function __construct($htmlDocument)
 	{
 		$this->dom = new DOMDocument();
+		$this->dom->strictErrorChecking = false;
 		$this->dom->loadHtml($htmlDocument);
 	}
 	

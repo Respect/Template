@@ -66,4 +66,20 @@ class HtmlTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals("<!DOCTYPE html>\n<html><body><h1><span>FooBar</span></h1></body></html>\n", (string) $v);
 	}
 
+	public function testSimpleInheritance()
+	{
+		$template = new Html("<!DOCTYPE html>\n<html><body><h1></h1><div>My Text</div></body></html>\n");
+		$model = new Html("<!DOCTYPE html>\n<html><body><h1><span><a>Hi!</a></span></h1></body></html>\n");
+		$template->inheritFrom($model, "h1");
+		$this->assertEquals("<!DOCTYPE html>\n<html><body><h1><span><a>Hi!</a></span></h1><div>My Text</div></body></html>\n", (string) $template);
+	}
+
+	public function testMultiInheritance()
+	{
+		$template = new Html("<!DOCTYPE html>\n<html><body><h1></h1><div>My Text</div><h1></h1></body></html>\n");
+		$model = new Html("<!DOCTYPE html>\n<html><body><h1><span><a>Hi!</a></span></h1></body></html>\n");
+		$template->inheritFrom($model, "h1");
+		$this->assertEquals("<!DOCTYPE html>\n<html><body><h1><span><a>Hi!</a></span></h1><div>My Text</div><h1><span><a>Hi!</a></span></h1></body></html>\n", (string) $template);
+	}
+
 }
