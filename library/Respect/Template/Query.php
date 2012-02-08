@@ -40,10 +40,7 @@ class Query
 		$css      = $results->getCssQuery();
 		$xpath    = $results->getXpathQuery();
 		$domxpath = new DOMXPath($this->document->getDom());
-		$nodelist = $domxpath->query($xpath);
-		foreach ($nodelist as $item) {
-			$return[] = $item;
-		}
-		return $return;
+		$nodelist = iterator_to_array($domxpath->query($xpath));
+		return $nodelist;
 	}
 }
