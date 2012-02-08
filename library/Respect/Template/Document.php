@@ -30,15 +30,7 @@ class Document
 	 */
 	public function __construct($htmlDocument)
 	{
-		$doc       = (string) $htmlDocument;
-		if (empty($doc))
-			throw new Argument('HTML string expected, none given');
-
-		$docId     = "-//W3C//DTD XHTML 1.0 Transitional//EN";
-		$docDtd    = "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd";
-		$dom       = new DOMImplementation();
-		$doctype   = $dom->createDocumentType("html", $docId, $docDtd);
-		$this->dom = $dom->createDocument();
+		$this->dom = new DOMDocument();
 		$this->dom->loadHtml($htmlDocument);
 	}
 	
@@ -77,7 +69,7 @@ class Document
 	public function render($beatiful=false)
 	{
 		$this->dom->formatOutput = $beatiful;
-		return $this->dom->saveXml();
+		return $this->dom->saveHTML();
 	}
 	
 	/**
