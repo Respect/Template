@@ -10,6 +10,11 @@
             "vcs": {
                 "url" : "git://github.com/Respect/Template.git"
             }
+        },
+        "Zend": {
+            "pear": {
+                "url" : "http://packages.zendframework.com/"
+            }
         }
     },
     "license" : "New BSD",
@@ -24,7 +29,8 @@
         }
     ],
     "require": {
-        "php": ">=5.3.0"
+        "php": ">=5.3.0",
+        "zend_dom": ">=2.0.0beta1"
     },
     "autoload": {
         "psr-0": {
