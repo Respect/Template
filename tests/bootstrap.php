@@ -8,7 +8,7 @@ date_default_timezone_set('UTC');
  * PHP software.
  */
 if (($autoloader = @include __DIR__.'/../vendor/.composer/autoload.php')) {
-    $autoloader->add('Zend', __DIR__ . '/../vendor/Zend_Dom/php');
+    $autoloader->add('Zend', __DIR__ . '/../vendor/pear-zf2/Zend_Dom/php');
 } else {
     set_include_path('../library' . PATH_SEPARATOR . get_include_path());
     spl_autoload_register(
