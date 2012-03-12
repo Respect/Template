@@ -1,18 +1,16 @@
 {
     "name": "Respect/Template",
-    "version": "0.1.4",
     "type": "library",
     "description": "Experimental, HTML-only templating engine.",
     "keywords": ["respect", "template"],
-    "homepage": "https://github.com/Respect/Template",
-    "repositories": {
-        "Respect/Template": {
-            "vcs": {
-                "url" : "git://github.com/Respect/Template.git"
-            }
-        }
-    },
+    "homepage": "http://respect.li",
     "license" : "New BSD",
+    "repositories": [
+        {
+            "type" : "pear",
+            "url" : "http://packages.zendframework.com/"
+        }
+    ],
     "authors" : [
         {
             "name": "Alexandre Gomes Gaigalas",
@@ -24,7 +22,8 @@
         }
     ],
     "require": {
-        "php": ">=5.3.0"
+        "php": ">=5.3.0",
+        "pear-zf2/zend_dom": ">=2.0.0beta1"
     },
     "autoload": {
         "psr-0": {
