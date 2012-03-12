@@ -1,5 +1,6 @@
 library/Symfony/
 library/Zend/
+vendor/
 .buildpath
 .project
 .DS_Store
@@ -18,6 +19,7 @@ nbproject
 *.gz
 *.bzip
 *.xz
+*.lock
 *.lzma
 *.iso
 *.tar

@@ -1,11 +1,11 @@
 language: php
-script: "cd tests;phpunit library"
+script:
+    "make test"
 
 php:
   - 5.3
   - 5.4
 
 before_script: 
-  - "sudo pyrus channel-discover packages.zendframework.com"
-  - "sudo pyrus install packages.zendframework.com/Zend_Dom-beta"
-  - "phpenv rehash"
+  - "curl -s http://getcomposer.org/installer | php"
+  - "php composer.phar install"
