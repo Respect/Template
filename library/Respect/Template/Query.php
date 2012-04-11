@@ -27,7 +27,7 @@ class Query
 	}
 	
 	/**
-	 * @return Zend_Dom_Query_Result
+	 * @return array
 	 */
 	public function getResult()
 	{

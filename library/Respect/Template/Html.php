@@ -19,7 +19,20 @@ class Html extends ArrayObject
 	
 	public function __construct($templateFileOrString)
 	{
-		$this->setTemplate($templateFileOrString);
+		if (file_exists($templateFileOrString))
+			$content = file_get_contents($templateFileOrString);
+		else
+			$content = $templateFileOrString;
+		$this->document = new Document($content);
+	}
+
+	/**
+	 * @see self::find()
+	 * @return array
+	 */
+	public function offsetGet($selector)
+	{
+		return $this->find($selector);
 	}
 
 	public function __toString()
@@ -44,38 +57,21 @@ class Html extends ArrayObject
 		return $this->document;
 	}
 
+	/**
+	 * @return array
+	 */
 	public function find($selector)
 	{
 		$query = new Query($this->document, $selector);
 		return $query->getResult();
 	}
 	
-	/**
-	 * Defines the template string or file and parses it with the DOMDocument.
-	 *
-	 * @param 	string 	$mixed	An HTML string or filename
-	 * @return 	void
-	 */
-	protected function setTemplate($mixed)
-	{
-		if (file_exists($mixed))
-			$content = file_get_contents($mixed);
-		else
-			$content = $mixed;
-
-		$this->document = new Document($content);
-	}
-	
 	public function render($data=null, $beatiful=false)
-	{
-		$this->resolveAliases();
-		$data = $data ?: $this->getArrayCopy();
-		return $this->document->decorate($data)->render($beatiful);
-	}
-
-	protected function resolveAliases()
 	{
 		foreach ($this->aliasFor as $selector => $alias)
 			$this[$selector] = $this[$alias];
+		
+		$data = $data ?: $this->getArrayCopy();
+		return $this->document->decorate($data)->render($beatiful);
 	}
 }
