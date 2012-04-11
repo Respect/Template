@@ -1,9 +1,7 @@
 <?php
-namespace Respect\Template;
+use Respect\Template\Html;
 use Respect\Template\HtmlElement as H;
 
-ini_set('display_errors', 'On');
-error_reporting(-1);
 require __DIR__.'/../tests/bootstrap.php';
 
 // Loading the template
@@ -12,13 +10,11 @@ $template = new Html('./cssZenGarden.html', '#lselect');
 // Changing the TITLE element inside HEAD tag
 $template['title']             = 'Respect\Template: The different template engine';
 
-$template['text'] = new Selector('#preable .p2');
-
 // Changing some text from the beginning of the BODY
-$template['#pageHeader h1']    = $template['#pageHeader h2'];
-$template['#pageHeader h2']    = 'A different template engine';
-$template['#quickSummary .p1'] = 'This page is an example of what Respect\Template can do for you. We got the CSS Zen Garden HTML markup as our template and changed its content with PHP using simple CSS queries.';
-$template['#quickSummary .p2'] = 'Design is for designers, let them create, style and keep their own HTML. With Respect\Template you can  grab this HTML and change anything you need, be it removing, adding or modifying exiting elements.';
+$template['#pageHeader h1']    = 'Respect/Template';
+$template['#pageHeader h2']    = 'HTML templates';
+$template['#quickSummary .p1'] = 'This page is a simple example of a Respect\Template.';
+$template['#quickSummary .p2'] = 'The content of this template is manipulated with CSS selectors and plain HTML.';
 
 //Changing more elements, creating new ones, etc ....
 $template['#preamble h3']      = 'What ninja skills should I have to use it?';
