@@ -26,15 +26,6 @@ class Html extends ArrayObject
 		$this->document = new Document($content);
 	}
 
-	/**
-	 * @see self::find()
-	 * @return array
-	 */
-	public function offsetGet($selector)
-	{
-		return $this->find($selector);
-	}
-
 	public function __toString()
 	{
 		return $this->render();
@@ -70,7 +61,7 @@ class Html extends ArrayObject
 	{
 		foreach ($this->aliasFor as $selector => $alias)
 			$this[$selector] = $this[$alias];
-		
+
 		$data = $data ?: $this->getArrayCopy();
 		return $this->document->decorate($data)->render($beatiful);
 	}
