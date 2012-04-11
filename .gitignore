@@ -1,5 +1,3 @@
-library/Symfony/
-library/Zend/
 vendor/
 .buildpath
 .project
@@ -7,6 +5,7 @@ vendor/
 .tm_properties
 .settings/
 .foundation-tmp
+.foundation
 phar
 *.phar
 tests/reports
