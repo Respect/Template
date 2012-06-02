@@ -1,10 +1,14 @@
-language: php
-script:
-    "make test"
+language:
+    php
 
 php:
   - 5.3
   - 5.4
 
 before_script: 
-  - "make foundation"
+  - curl -s http://getcomposer.org/installer | php
+  - php composer.phar install
+  - cd tests
+
+script:
+  - phpunit --colors .

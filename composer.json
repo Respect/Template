@@ -8,10 +8,6 @@
     "license": "BSD Style",
     "authors": [
         {
-            "name": "Alexandre",
-            "email": "alexandre@gaigalas.net"
-        },
-        {
             "name": "Alexandre Gaigalas",
             "email": "alexandre@gaigalas.net"
         },
@@ -24,6 +20,10 @@
             "email": "henriquemoody@gmail.com"
         }
     ],
+    "require": {
+        "php": ">=5.3.3",
+        "brikou/zend_dom" : "*"
+    },
     "autoload": {
         "psr-0": {
             "Respect\\Template": "library\/"
