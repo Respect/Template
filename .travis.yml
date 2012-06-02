@@ -11,4 +11,4 @@ before_script:
   - cd tests
 
 script:
-  - phpunit --colors .
+  - phpunit --colors --coverage-text .

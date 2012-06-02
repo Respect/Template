@@ -11,8 +11,8 @@
          syntaxCheck="false"
          verbose="false">
     <filter>
-        <whitelist>
-            <directory>../library/</directory>
+        <whitelist addUncoveredFilesFromWhitelist="false">
+            <directory>../library/Respect/</directory>
         </whitelist>
     </filter>
 </phpunit>
