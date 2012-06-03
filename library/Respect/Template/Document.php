@@ -165,10 +165,16 @@ EOD;
 	{
 		$this->dom->formatOutput = $beautiful;
 
-		if ($doctype)
-			return $doctype . preg_replace('/<\!DOCTYPE[ \S]*>/', '', $this->dom->saveHTML());
+		if ($doctype) {
+			$doc = new DOMDocument();
+			$doc->loadHTML($doctype);
+			$dt = $doc->doctype;
+			$di = new DOMImplementation();
+			$dt = $di->createDocumentType($dt->name, $dt->publicId, $dt->systemId);
+			$this->dom->replaceChild($dt, $this->dom->doctype);
+		}
 
-		return $this->dom->saveHTML();
+		return preg_replace('/<\?xml[\s\S]*\?>\n/', '', $this->dom->saveXML());
 	}
 	
 	/**
