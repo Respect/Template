@@ -15,7 +15,7 @@ class Html extends ArrayObject
 	* Constants to define the docnype of the document.
 	*
 	* @see Document
-	* @author nickl- <nick@jigsoft.co.za>
+	* @author Nick Lombard <github@jigsoft.co.za>
 	*/
 	const HTML_5 = Document::HTML_5;
 	const HTML_4_01_STRICT = Document::HTML_4_01_STRICT;

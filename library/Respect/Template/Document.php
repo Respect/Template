@@ -20,7 +20,7 @@ class Document
 	* Constants to define the docnype of the document.
 	*
 	* @link http://www.w3.org/QA/2002/04/valid-dtd-list.html
-	* @author nickl- <nick@jigsoft.co.za>
+	* @author Nick Lombard <github@jigsoft.co.za>
 	*/
 	const HTML_5 = <<<'HTML'
 <!DOCTYPE html>
