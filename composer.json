@@ -21,12 +21,12 @@
         }
     ],
     "require": {
-        "php": ">=5.3.3",
-        "brikou/zend_dom" : "*"
+        "php": ">=5.3.3"
     },
     "autoload": {
         "psr-0": {
-            "Respect\\Template": "library\/"
+            "Respect\\Template": "library\/",
+            "Zend\\Dom": "library\/"
         }
     }
 }
