@@ -7,6 +7,8 @@ use \DOMXPath;
 use \InvalidArgumentException as Argument;
 use \UnexpectedValueException as Unexpected;
 use Zend\Dom\Query as DomQuery;
+use \simple_html_dom as simple_html_dom;
+
 /**
  * Normalizes HTMl into a valid DOM XML document.
  *
@@ -19,34 +21,42 @@ class Document
 	/**
 	 * @var DOMDocument
 	 */
-	private $dom;
+	private $html;
 	/**
 	 * @var Zend_Dom_Query
 	 */
-	private $queryDocument;
-	
+//	private $queryDocument;
+
 	/**
-	 * @param 	string	$htmlDocument 
+	 * @param 	string	$htmlDocument
 	 */
 	public function __construct($htmlDocument)
 	{
-		$this->dom = new DOMDocument();
-		$this->dom->strictErrorChecking = false;
-		$this->dom->loadHtml($htmlDocument);
+		$this->html = new simple_html_dom();
+		$this->html->load($htmlDocument);
+//		$this->dom = new DOMDocument();
+//		$this->dom->strictErrorChecking = false;
+//		$this->dom->loadHtml($htmlDocument);
 	}
-	
+
+    function __destruct()
+    {
+        $this->html->clear();
+		unset($this->html);
+    }
+
 	/**
 	 * @return DOMDocument
 	 */
 	public function getDom()
 	{
-		return $this->dom;
+		return $this->html;
 	}
-	
+
 	/**
-	 * Replaces this dom content with the given array. 
+	 * Replaces this dom content with the given array.
 	 * The array structure is: $array['Css Selector to Eelement'] = 'content';
-	 * 
+	 *
 	 * @param 	array 	            $data
 	 * @param   string[optional]    $decorator  Class to be used as decorator
 	 * @return 	Respect\Template\Document
@@ -61,7 +71,7 @@ class Document
 		}
 		return $this;
 	}
-	
+
 	/**
 	 * Returns the XML representation of the current DOM tree.
 	 *
@@ -69,10 +79,12 @@ class Document
 	 */
 	public function render($beautiful=false)
 	{
-		$this->dom->formatOutput = $beautiful;
-		return $this->dom->saveHTML();
+
+//		$this->dom->formatOutput = $beautiful;
+//		return $this->dom->saveHTML();
+		return $this->html->save();
 	}
-	
+
 	/**
 	 * Returns XML to be parsed by CSS the selector.
 	 * This will never be the final XML to be rendered.
@@ -81,9 +93,10 @@ class Document
 	 */
 	public function getQueryDocument()
 	{
-		if (!$this->queryDocument)
-			return $this->queryDocument = new DomQuery($this->render());
-
-		return $this->queryDocument;
+		return $this->html;
+//		if (!$this->queryDocument)
+//			return $this->queryDocument = new DomQuery($this->render());
+//
+//		return $this->queryDocument;
 	}
 }

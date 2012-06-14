@@ -11,21 +11,24 @@ class AppendTest extends \PHPUnit_Framework_TestCase
 			array('Hello World!'),
 		);
 	}
-	
+
 	/**
 	 * @dataProvider strings
 	 */
 	public function testWithSingleElement($with)
 	{
-		$doc       = new DOMDocument('1.0', 'iso-8859-1');
+		$doc       = new simple_html_dom();// new DOMDocument('1.0', 'iso-8859-1');
+		$doc->load('');
 		$node      = $doc->createElement('div');
 		$expect    = '<div>'.$with.'</div>';
 		$elements  = array($node);
 		$doc->appendChild($node);
-		
+
 		$this->assertFalse($node->hasChildNodes());
 		new Append($elements, Adapter::factory($doc, $with));
 		$this->assertTrue($node->hasChildNodes());
-		$this->assertContains($expect, $doc->saveXml());
+		$this->assertContains($expect, $doc->save()); //Xml());
+		$doc->clear();
+		unset($doc);
 	}
 }

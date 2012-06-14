@@ -1,12 +1,12 @@
 <?php
 namespace Respect\Template;
 
-use \InvalidArgumentException as Argument;
-use \UnexpectedValueException as Unexpected;
-use \DOMImplementation;
-use \DOMDocument;
-use \DOMText;
-use \DOMNode;
+//use \InvalidArgumentException as Argument;
+//use \UnexpectedValueException as Unexpected;
+//use \DOMImplementation;
+//use \DOMDocument;
+//use \DOMText;
+//use \DOMNode;
 use \ArrayObject;
 
 class Html extends ArrayObject
@@ -16,7 +16,7 @@ class Html extends ArrayObject
 	 */
 	protected $document;
 	public $aliasFor = array();
-	
+
 	public function __construct($templateFileOrString)
 	{
 		if (file_exists($templateFileOrString))
@@ -37,10 +37,11 @@ class Html extends ArrayObject
 		foreach ($selectors as $selector)
 			foreach ($model->find($selector) as $modelNode)
 				foreach ($this->find($selector) as $targetNode)
-					$targetNode->parentNode->replaceChild(
-						$this->document->getDom()->importNode($modelNode, true),
-						$targetNode
-					);
+					$targetNode->outertext = $modelNode->outertext;
+//					$targetNode->parentNode->replaceChild(
+//						$this->document->getDom()->importNode($modelNode, true),
+//						$targetNode
+//					);
 	}
 
 	public function getDocument()
@@ -56,7 +57,7 @@ class Html extends ArrayObject
 		$query = new Query($this->document, $selector);
 		return $query->getResult();
 	}
-	
+
 	public function render($data=null, $beatiful=false)
 	{
 		foreach ($this->aliasFor as $selector => $alias)
