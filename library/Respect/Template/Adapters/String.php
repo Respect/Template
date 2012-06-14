@@ -1,10 +1,12 @@
 <?php
 namespace Respect\Template\Adapters;
 
-use \DOMNode;
-use \DOMText;
+//use \DOMNode;
+//use \DOMText;
 use \ReflectionObject;
 use Respect\Template\Document;
+use \simple_html_dom as simple_html_dom;
+
 class String extends AbstractAdapter
 {
 	public function isValidData($data)
@@ -16,9 +18,11 @@ class String extends AbstractAdapter
 		$reflection = new ReflectionObject($data);
 		return $reflection->hasMethod('__toString');
 	}
-	
-	protected function getDomNode($data, DOMNode $parent)
+
+	protected function getDomNode($data, $parent) //DOMNode $parent)
 	{
-		return new DOMText($data);
+		$html = new simple_html_dom();
+		return $html->createTextNode($data);
+//		return new DOMText($data);
 	}
 }

@@ -4,7 +4,7 @@ use Respect\Template\Adapter;
 use \DOMDocument;
 
 class Decorator_ReplaceTest extends \PHPUnit_Framework_TestCase
-{	
+{
 	/**
 	 * @var DOMDocument
 	 */
@@ -12,7 +12,8 @@ class Decorator_ReplaceTest extends \PHPUnit_Framework_TestCase
 
 	protected function setUp()
 	{
-		$this->dom = new DOMDocument('1.0', 'iso-8859-1');
+		$this->dom = new simple_html_dom();//DOMDocument('1.0', 'iso-8859-1');
+		$this->dom->load('');
 	}
 
 	public function testSimpleReplace()
@@ -21,6 +22,12 @@ class Decorator_ReplaceTest extends \PHPUnit_Framework_TestCase
 		$span = $this->dom->createElement('span', 'it matters');
 		$this->dom->appendChild($div);
 		new Decorator($div, Adapter::factory($this->dom, $span));
-		$this->assertContains('<span>it matters</span>', $this->dom->saveXML());
+		$this->assertContains('<span>it matters</span>', $this->dom->save()); //XML());
 	}
+
+	protected function tearDown()
+    {
+        $this->dom->clear();
+		unset($this->dom);
+    }
 }
