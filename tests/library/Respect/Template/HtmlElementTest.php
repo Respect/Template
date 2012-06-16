@@ -20,6 +20,12 @@ class HtmlElementTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals('<input type="text" id="test" />', (string) $input);
 	}
 
+	public function testUnCamelAttributes()
+	{
+		$div = H::div('Uhull')->dataToggle('test');
+		$this->assertEquals('<div data-toggle="test">Uhull</div>', (string) $div);
+	}
+
 	public function testAttributesAndChildren()
 	{
 		$div = H::div('Uhull')->id('test');
@@ -47,3 +53,4 @@ class HtmlElementTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals((string)$ul, (string)$_ul->getDOMNode($dom)); // $this->assertEquals($ul, $_ul->getDOMNode($dom));
     }
 }
+
