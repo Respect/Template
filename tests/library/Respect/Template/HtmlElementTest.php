@@ -20,6 +20,12 @@ class HtmlElementTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals('<input type="text" id="test" />', (string) $input);
 	}
 	
+	public function testUnCamelAttributes()
+	{
+		$div = H::div('Uhull')->dataToggle('test');
+		$this->assertEquals('<div data-toggle="test">Uhull</div>', (string) $div);
+	}
+
 	public function testAttributesAndChildren()
 	{
 		$div = H::div('Uhull')->id('test');
@@ -42,7 +48,6 @@ class HtmlElementTest extends \PHPUnit_Framework_TestCase
         $ul->appendChild($dom->createElement('li', 'one'));
         $ul->appendChild($dom->createElement('li', 'two'));
         
-        $_ul = H::ul(H::li('one'), H::li('two'));
-        $this->assertEquals($ul, $_ul->getDOMNode($dom));
     }
 }
+
