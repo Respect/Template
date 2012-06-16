@@ -17,6 +17,7 @@ class HtmlElement
     
     public function __call($attribute, $value)
     {
+        $attribute = strtolower(preg_replace('/[A-Z]/', '-$0', $attribute));
         $this->attributes[$attribute] = $value[0];
         return $this;
     }
@@ -58,3 +59,4 @@ class HtmlElement
         return $node;
     }
 }
+
