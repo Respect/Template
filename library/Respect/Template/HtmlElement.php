@@ -49,7 +49,7 @@ class HtmlElement
 
         $current = $current ?: $this ;
 		$html = new simple_html_dom();
-		return $html->load($current);
+		return $html->load((string)$current);
 
 //        $node    = $dom->createElement($current->nodeName);
 //        foreach ($current->attributes as $name=>$value)
