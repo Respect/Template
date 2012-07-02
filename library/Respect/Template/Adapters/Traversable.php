@@ -43,7 +43,10 @@ class Traversable extends AbstractAdapter
 			case 'tr':
 				return 'td';
 				break;
-			default:
+                        case 'head':
+                                return '';
+                                break;
+                        default:
 				return 'span';
 				break;
 		}

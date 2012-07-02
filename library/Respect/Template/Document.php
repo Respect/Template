@@ -63,13 +63,19 @@ class Document
 	 */
 	public function decorate(array $data, $decorator = null)
 	{
-		foreach ($data as $selector=>$with) {
-			$adapter   = Adapter::factory($this->getDom(), $with);
-			$decorator = $decorator ?: $adapter->getDecorator();
-			$query     = new Query($this, $selector);
-			new $decorator($query, $adapter);
-		}
-		return $this;
+            foreach ($data as $selector=>$with) {
+                $adapter = Adapter::factory($this->getDom(), $with);
+
+                if ($selector == 'head') // be a good citizen append to <head>
+                        $decorator = 'Respect\Template\Decorators\Append';
+                else
+                        $decorator = $decorator ?: $adapter->getDecorator();
+
+                $query = new Query($this, $selector);
+
+                new $decorator($query, $adapter);
+            }
+            return $this;
 	}
 
 	/**
