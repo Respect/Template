@@ -1,4 +1,5 @@
 <?php
+use \ReflectionClass;
 use Respect\Template\Html;
 
 class HtmlTest extends \PHPUnit_Framework_TestCase
@@ -17,6 +18,7 @@ class HtmlTest extends \PHPUnit_Framework_TestCase
 	public function testSetTemplate($template, $data, $expected)
 	{
 		$view = new Html($template);
+		$this->assertInstanceOf('Respect\Template\Document', $view->getDocument());
 		$out  = $view->render();
 		$this->assertContains($template, $out, "Output does not have the defined template: {$out}");
 	}
