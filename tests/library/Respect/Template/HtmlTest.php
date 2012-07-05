@@ -10,7 +10,7 @@ class HtmlTest extends \PHPUnit_Framework_TestCase
 			array('<ul id="test">_</ul>', array('#test'=>array('A','B')), '<ul id="test"><li>A</li><li>B</li></ul>')
 		);
 	}
-	
+
 	/**
 	 * @dataProvider constructs
 	 */
@@ -20,7 +20,7 @@ class HtmlTest extends \PHPUnit_Framework_TestCase
 		$out  = $view->render();
 		$this->assertContains($template, $out, "Output does not have the defined template: {$out}");
 	}
-	
+
 	/**
 	 * @depends testSetTemplate
 	 * @dataProvider constructs
@@ -31,7 +31,7 @@ class HtmlTest extends \PHPUnit_Framework_TestCase
 		$result = $view->render($data);
 		$this->assertContains($expected, $result);
 	}
-	
+
 	/**
 	 * @depends testPassingDataToRender
 	 * @dataProvider constructs
@@ -41,11 +41,11 @@ class HtmlTest extends \PHPUnit_Framework_TestCase
 		$view = new Html($template);
 		foreach ($data as $key=>$val)
 			$view[$key] = $val;
-		
+
 		$this->assertEquals($data, $view->getArrayCopy(), 'ArrayObject did not work to set data for template');
 		$this->assertContains($expected, (string) $view);
 	}
-	
+
 	public function testArrayAccessInterface()
 	{
 		$template = new Html('<div id="one"></div>');
@@ -60,26 +60,26 @@ class HtmlTest extends \PHPUnit_Framework_TestCase
 
 	public function testResolveAliases()
 	{
-		$v = new Html("<!DOCTYPE html>\n<html><body><h1><span></span></h1></body></html>\n");
+		$v = new Html("<!DOCTYPE html><html><body><h1><span></span></h1></body></html>");
 		$v->aliasFor["h1 > span"] = "pagetitle";
 		$v["pagetitle"] = "FooBar";
-		$this->assertEquals("<!DOCTYPE html>\n<html><body><h1><span>FooBar</span></h1></body></html>\n", (string) $v);
+		$this->assertEquals("<!DOCTYPE html><html><body><h1><span>FooBar</span></h1></body></html>", (string) $v);
 	}
 
 	public function testSimpleInheritance()
 	{
-		$template = new Html("<!DOCTYPE html>\n<html><body><h1></h1><div>My Text</div></body></html>\n");
-		$model = new Html("<!DOCTYPE html>\n<html><body><h1><span><a>Hi!</a></span></h1></body></html>\n");
+		$template = new Html("<!DOCTYPE html><html><body><h1></h1><div>My Text</div></body></html>");
+		$model = new Html("<!DOCTYPE html><html><body><h1><span><a>Hi!</a></span></h1></body></html>");
 		$template->inheritFrom($model, "h1");
-		$this->assertEquals("<!DOCTYPE html>\n<html><body><h1><span><a>Hi!</a></span></h1><div>My Text</div></body></html>\n", (string) $template);
+		$this->assertEquals("<!DOCTYPE html><html><body><h1><span><a>Hi!</a></span></h1><div>My Text</div></body></html>", (string) $template);
 	}
 
 	public function testMultiInheritance()
 	{
-		$template = new Html("<!DOCTYPE html>\n<html><body><h1></h1><div>My Text</div><h1></h1></body></html>\n");
-		$model = new Html("<!DOCTYPE html>\n<html><body><h1><span><a>Hi!</a></span></h1></body></html>\n");
+		$template = new Html("<!DOCTYPE html><html><body><h1></h1><div>My Text</div><h1></h1></body></html>");
+		$model = new Html("<!DOCTYPE html><html><body><h1><span><a>Hi!</a></span></h1></body></html>");
 		$template->inheritFrom($model, "h1");
-		$this->assertEquals("<!DOCTYPE html>\n<html><body><h1><span><a>Hi!</a></span></h1><div>My Text</div><h1><span><a>Hi!</a></span></h1></body></html>\n", (string) $template);
+		$this->assertEquals("<!DOCTYPE html><html><body><h1><span><a>Hi!</a></span></h1><div>My Text</div><h1><span><a>Hi!</a></span></h1></body></html>", (string) $template);
 	}
 
 }

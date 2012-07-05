@@ -1,7 +1,7 @@
 <?php
 namespace Respect\Template\Adapters;
 
-use \DOMNode;
+//use \DOMNode;
 use Respect\Template\Adapter;
 use Respect\Template\Decorators\Append;
 class A extends AbstractAdapter
@@ -12,8 +12,8 @@ class A extends AbstractAdapter
 			return true;
 		return false;
 	}
-	
-	protected function getDomNode($data, DOMNode $parent)
+
+	protected function getDomNode($data, $parent)// DOMNode $parent)
 	{
 		$element = $this->createElement($parent, 'a');
 		$element->setAttribute('href', $this->getProperty($data, 'href'));
@@ -24,7 +24,7 @@ class A extends AbstractAdapter
 		}
 		return $element;
 	}
-	
+
 	public function getDecorator()
 	{
 		return 'Respect\Template\Decorators\Replace';
