@@ -20,7 +20,7 @@ class HtmlElementTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals('<input type="text" id="test" />', (string) $input);
 	}
 
-        public function testUnCamelAttributes()
+	public function testUnCamelAttributes()
 	{
 		$div = H::div('Uhull')->dataToggle('test');
 		$this->assertEquals('<div data-toggle="test">Uhull</div>', (string) $div);
