@@ -37,9 +37,7 @@
  * @package PlaceLocalInclude
  * @subpackage simple_html_dom
  */
-require_once('PHP/Debug.php');
-global $debugObjec;
-$debugObjec = new PHP_Debug();
+
 /**
  * All of the Defines for the classes below.
  * @author S.C. Chen <me578022@gmail.com>
@@ -244,11 +242,11 @@ class simple_html_dom_node
     // returns the parent of node
     function parent($parent=null)
     {
-		if (isset($parent)) {
-			$this->parent = $parent;
-			$this->parent->nodes[] = $this;
-			$this->parent->children[] = $this;
-		}
+        if (isset($parent)) {
+            $this->parent = $parent;
+            $this->parent->nodes[] = $this;
+            $this->parent->children[] = $this;
+        }
         return $this->parent;
     }
 
@@ -263,11 +261,11 @@ class simple_html_dom_node
         return null;
     }
 
-	// verify that node has children
-	function has_child()
-	{
-		return !empty($this->children);
-	}
+    // verify that node has children
+    function has_child()
+    {
+        return !empty($this->children);
+    }
 
     // returns the first child of node
     function first_child()
@@ -805,11 +803,11 @@ class simple_html_dom_node
     }
 
     /**
-    * Returns true if $string is valid UTF-8 and false otherwise.
-    *
-    * @param mixed $str String to be tested
-    * @return boolean
-    */
+     * Returns true if $string is valid UTF-8 and false otherwise.
+     *
+     * @param mixed $str String to be tested
+     * @return boolean
+     */
     static function is_utf8($str)
     {
         $c=0; $b=0;
@@ -885,7 +883,7 @@ class simple_html_dom_node
             $attributes = array();
             preg_match_all("/([\w-]+)\s*:\s*([^;]+)\s*;?/", $this->attr['style'], $matches, PREG_SET_ORDER);
             foreach ($matches as $match) {
-              $attributes[$match[1]] = $match[2];
+                $attributes[$match[1]] = $match[2];
             }
 
             // If there is a width in the style attributes:
@@ -945,16 +943,15 @@ class simple_html_dom_node
     function getElementsById($id, $idx=null) {return $this->find("#$id", $idx);}
     function getElementByTagName($name) {return $this->find($name, 0);}
     function getElementsByTagName($name, $idx=null) {return $this->find($name, $idx);}
-	function nodeName() {return $this->tag;}
     function parentNode() {return $this->parent();}
-	function hasChildNodes() {return $this->has_child();}
-	function childNodes($idx=-1) {return $this->children($idx);}
+    function childNodes($idx=-1) {return $this->children($idx);}
     function firstChild() {return $this->first_child();}
     function lastChild() {return $this->last_child();}
     function nextSibling() {return $this->next_sibling();}
     function previousSibling() {return $this->prev_sibling();}
-	function appendChild($node) {$node->parent($this); return $node;}
-
+    function hasChildNodes() {return $this->has_child();}
+    function nodeName() {return $this->tag;}
+    function appendChild($node) {$node->parent($this); return $node;}
 }
 
 /**
@@ -1026,8 +1023,6 @@ class simple_html_dom
             $this->optional_closing_array=array();
         }
         $this->_target_charset = $target_charset;
-
-		return $this;
     }
 
     function __destruct()
@@ -1067,7 +1062,8 @@ class simple_html_dom
         $this->root->_[HDOM_INFO_END] = $this->cursor;
         $this->parse_charset();
 
-		return $this;
+        // make load function chainable
+        return $this;
     }
 
     // load html from file
@@ -1687,25 +1683,19 @@ class simple_html_dom
         }
     }
 
-	// to create the illussion of dom_node inheritance
-	function __call($name, $arguments) {
-		if (isset($this->root))
-			if (method_exists($this->root, $name))
-					return call_user_method_array ($name, $this->root, $arguments);
-	}
+    // to create the illussion of dom_node inheritance
+    function __call($name, $arguments) {
+        if (isset($this->root))
+            if (method_exists($this->root, $name))
+                return call_user_func_array (array($this->root, $name), $arguments);
+    }
 
     // camel naming conventions
-	function createElement($name, $value=null) {return @str_get_html('<'.$name.'>'.$value.'</'.$name.'>')->first_child();}
-	function createTextNode($value) {return @end(str_get_html($value)->nodes);}
-//	function hasChildNodes() {return $this->root->has_child();}
-//    function childNodes($idx=-1) {return $this->root->childNodes($idx);}
-//    function firstChild() {return $this->root->first_child();}
-//    function lastChild() {return $this->root->last_child();}
+    function createElement($name, $value=null) {return @str_get_html("<$name>$value</$name>")->first_child();}
+    function createTextNode($value) {return @end(str_get_html($value)->nodes);}
     function getElementById($id) {return $this->find("#$id", 0);}
     function getElementsById($id, $idx=null) {return $this->find("#$id", $idx);}
     function getElementByTagName($name) {return $this->find($name, 0);}
     function getElementsByTagName($name, $idx=-1) {return $this->find($name, $idx);}
     function loadFile() {$args = func_get_args();$this->load_file($args);}
 }
-
-?>
