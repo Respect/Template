@@ -1,3 +1,4 @@
+<!-- a Courtesy of Respect/Foundation -->
 <phpunit backupGlobals="false"
          backupStaticAttributes="false"
          bootstrap="bootstrap.php"
@@ -6,19 +7,23 @@
          convertErrorsToExceptions="true"
          convertNoticesToExceptions="true"
          convertWarningsToExceptions="true"
+         mapTestClassNameToCoveredClassName="true"
+         forceCoversAnnotation="true"
          processIsolation="false"
+         stopOnError="false"
          stopOnFailure="false"
+         stopOnIncomplete="false"
+         stopOnSkipped="false"
+         testSuiteLoaderClass="PHPUnit_Runner_StandardTestSuiteLoader"
          syntaxCheck="false"
+         strict="false"
          verbose="false">
     <filter>
-        <whitelist addUncoveredFilesFromWhitelist="false">
-            <directory>../library/Respect/</directory>
+        <whitelist addUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">../library/Respect/</directory>
         </whitelist>
     </filter>
-    <testsuite name="URLify Test Suite">
-        <directory>.</directory>
+    <testsuite name="Respect/Template Test Suite">
+        <directory suffix="Test.php" phpVersion="5.3.0" phpVersionOperator=">=">.</directory>
     </testsuite>
-    <logging>
-        <log type="coverage-text" target="php://stdout" showUncoveredFiles="false"/>
-    </logging>
 </phpunit>
