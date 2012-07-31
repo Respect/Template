@@ -1,9 +1,7 @@
 <?php
 namespace Respect\Template;
 
-//use \DOMText;
-//use \DOMDocument;
-use \simple_html_dom as simple_html_dom;
+use simple_html_dom as simple_html_dom;
 
 class HtmlElement
 {
@@ -42,25 +40,10 @@ class HtmlElement
         return "<{$this->nodeName}{$attrs} />";
     }
 
-    public function getDOMNode($dom, $current=null) // DOMDocument $dom, $current=null)
+    public function getDOMNode($dom, $current=null)
     {
-//        if (is_string($current))
-//            return new DOMText($current);
-
         $current = $current ?: $this ;
 		$html = new simple_html_dom();
 		return $html->load((string)$current);
-
-//        $node    = $dom->createElement($current->nodeName);
-//        foreach ($current->attributes as $name=>$value)
-//            $node->setAttribute($name, $value);
-//
-//        if (!count($current->childrenNodes))
-//            return $node;
-//
-//        foreach ($current->childrenNodes as $child)
-//            $node->appendChild($this->getDOMNode($dom, $child));
-//
-//        return $node;
     }
 }

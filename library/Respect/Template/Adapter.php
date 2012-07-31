@@ -2,9 +2,8 @@
 namespace Respect\Template;
 
 use Respect\Template\Adapters\AbstractAdapter;
-//use \DOMNode;
-//use \DOMDocument;
-use \UnexpectedValueException as Unexpected;
+use UnexpectedValueException as Unexpected;
+
 class Adapter
 {
 	private static $instance;
@@ -12,7 +11,7 @@ class Adapter
 
 	private function __construct()
 	{
-		$adapters       = array('HtmlElement', 'A', 'Dom', 'Traversable', 'String');
+		$adapters = array('HtmlElement', 'A', 'Dom', 'Traversable', 'String');
 		foreach ($adapters as $className) {
 			$class                  = 'Respect\Template\Adapters\\'.$className;
 			$this->adapters[$class] = new $class();
@@ -27,12 +26,12 @@ class Adapter
 		return self::$instance = new Adapter();
 	}
 
-	public static function factory($dom, $content) //DOMDocument $dom, $content)
+	public static function factory($dom, $content)
 	{
 		return self::getInstance()->_factory($dom, $content);
 	}
 
-	public function _factory($dom, $content) //DOMDocument $dom, $content)
+	public function _factory($dom, $content)
 	{
 		if ($content instanceof AbstractAdapter)
 			return $content;

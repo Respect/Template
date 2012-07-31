@@ -1,9 +1,8 @@
 <?php
 namespace Respect\Template\Adapters;
 
-// use \DOMNode;
 use Respect\Template\Adapter;
-use \simple_html_dom as simple_html_dom;
+use simple_html_dom as simple_html_dom;
 
 class Traversable extends AbstractAdapter
 {
@@ -12,10 +11,10 @@ class Traversable extends AbstractAdapter
 		return is_array($data);
 	}
 
-	protected function getDomNode($data, $parent) //DOMNode $parent)
+	protected function getDomNode($data, $parent)
 	{
 		$tag       = $this->getChildTag($parent);
-		$container = new simple_html_dom(); //$parent->ownerDocument->createDocumentFragment();
+		$container = new simple_html_dom();
 		$container = $container->load('');
 		foreach ($data as $analyse) {
 			$value  = (is_array($analyse)) ? null : $analyse ;
@@ -27,7 +26,7 @@ class Traversable extends AbstractAdapter
 		return $container;
 	}
 
-	protected function getChildTag($node) //DOMNode $node)
+	protected function getChildTag($node)
 	{
 		switch ($node->nodeName()) {
 			case 'ol':

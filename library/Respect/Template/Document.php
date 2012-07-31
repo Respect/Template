@@ -1,13 +1,9 @@
 <?php
 namespace Respect\Template;
 
-use \DOMDocument;
-use \DOMImplementation;
-use \DOMXPath;
-use \InvalidArgumentException as Argument;
-use \UnexpectedValueException as Unexpected;
-use Zend\Dom\Query as DomQuery;
-use \simple_html_dom as simple_html_dom;
+//use \InvalidArgumentException as Argument;
+//use \UnexpectedValueException as Unexpected;
+use simple_html_dom as simple_html_dom;
 
 /**
  * Normalizes HTMl into a valid DOM XML document.
@@ -19,13 +15,9 @@ use \simple_html_dom as simple_html_dom;
 class Document
 {
 	/**
-	 * @var DOMDocument
+	 * @var simple_html_dom
 	 */
 	private $html;
-	/**
-	 * @var Zend_Dom_Query
-	 */
-//	private $queryDocument;
 
 	/**
 	 * @param 	string	$htmlDocument
@@ -34,9 +26,6 @@ class Document
 	{
 		$this->html = new simple_html_dom();
 		$this->html->load($htmlDocument);
-//		$this->dom = new DOMDocument();
-//		$this->dom->strictErrorChecking = false;
-//		$this->dom->loadHtml($htmlDocument);
 	}
 
     function __destruct()
@@ -46,7 +35,7 @@ class Document
     }
 
 	/**
-	 * @return DOMDocument
+	 * @return simple_html_dom
 	 */
 	public function getDom()
 	{
@@ -85,9 +74,6 @@ class Document
 	 */
 	public function render($beautiful=false)
 	{
-
-//		$this->dom->formatOutput = $beautiful;
-//		return $this->dom->saveHTML();
 		return $this->html->save();
 	}
 
@@ -100,9 +86,5 @@ class Document
 	public function getQueryDocument()
 	{
 		return $this->html;
-//		if (!$this->queryDocument)
-//			return $this->queryDocument = new DomQuery($this->render());
-//
-//		return $this->queryDocument;
 	}
 }

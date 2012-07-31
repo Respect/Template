@@ -1,8 +1,6 @@
 <?php
 namespace Respect\Template;
 
-use \DOMXPath;
-
 class Query
 {
 	/**
@@ -31,15 +29,9 @@ class Query
 	 */
 	public function getResult()
 	{
-
 		// Get results by a CSS selector
 		$selector = $this->selector;
 		$document = $this->document->getQueryDocument();
 		return $document->find($selector);
-//		$results  = $document->execute($selector);
-//		$xpath    = $results->getXpathQuery();
-//		$domxpath = new DOMXPath($this->document->getDom());
-//		$nodelist = iterator_to_array($domxpath->query($xpath));
-//		return $nodelist;
 	}
 }

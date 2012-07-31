@@ -1,9 +1,8 @@
 <?php
 namespace Respect\Template\Adapters;
 
-//use \ReflectionObject;
-//use \DOMNode;
 use Respect\Template\Adapter;
+
 class HtmlElement extends AbstractAdapter
 {
 	public function isValidData($data)
@@ -11,7 +10,7 @@ class HtmlElement extends AbstractAdapter
 		return ($data instanceof \Respect\Template\HtmlElement);
 	}
 
-	protected function getDomNode($data, $parent)//DOMNode $parent)
+	protected function getDomNode($data, $parent)
 	{
 		return $data->getDOMNode($this->getDom());
 	}

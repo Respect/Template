@@ -1,21 +1,18 @@
 <?php
 namespace Respect\Template\Adapters;
 
-//use \DOMNode;
-//use \DOMDocument;
-//use \UnexpectedValueException as Unexpected;
 use Respect\Template\Adapter;
-use \simple_html_dom as simple_html_dom;
+use simple_html_dom as simple_html_dom;
 
 abstract class AbstractAdapter
 {
 	/**
-	 * @var DOMDocument
+	 * @var simple_html_dom
 	 */
 	private $dom;
 	protected $content;
 
-	public function __construct($dom=null, $content=null)//DOMDocument $dom=null, $content=null)
+	public function __construct($dom=null, $content = null)
 	{
         if (!is_null($dom))
             $this->dom = $dom;
@@ -25,20 +22,17 @@ abstract class AbstractAdapter
 	}
 
 	abstract public function isValidData($data);
-	abstract protected function getDomNode($data, $parent);//DOMNode $parent);
+	abstract protected function getDomNode($data, $parent);
 
-	public function adaptTo($parent, $content=null) //DOMNode $parent, $content=null)
+	public function adaptTo($parent, $content = null)
 	{
 		$content = ($content) ? $content : $this->content;
         return $this->getDomNode($content, $parent);
 	}
 
-	protected function createElement($parent, $name, $value=null)//DOMNode $parent, $name, $value=null)
+	protected function createElement($parent, $name, $value = null)
 	{
-//		if (!$this->dom instanceof DOMDocument)
-//			throw new Unexpected('No DOMDocument, cannot create new element');
 		$html = new simple_html_dom();
-//		return $html->load("<$name>$value</$name>")->firstChild();// $this->dom->createElement($name, $value);
 		return $html->createElement($name, $value);
 	}
 
@@ -59,7 +53,7 @@ abstract class AbstractAdapter
 	}
 
     /**
-     * @return DOMDocument
+     * @return simple_html_dom
      */
     public function getDom()
     {

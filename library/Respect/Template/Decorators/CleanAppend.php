@@ -1,13 +1,9 @@
 <?php
 namespace Respect\Template\Decorators;
 
-use \DOMNode;
-use \UnexpectedValueException as Value;
-use \InvalidArgumentException as Argument;
-
 class CleanAppend extends AbstractDecorator
 {
-	protected function decorate($node, $with=null) //DOMNode $node, DOMNode $with=null)
+	protected function decorate($node, $with=null)
 	{
 		new Clean(array($node));
 		$node->appendChild($with);

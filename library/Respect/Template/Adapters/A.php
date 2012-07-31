@@ -1,9 +1,9 @@
 <?php
 namespace Respect\Template\Adapters;
 
-//use \DOMNode;
 use Respect\Template\Adapter;
 use Respect\Template\Decorators\Append;
+
 class A extends AbstractAdapter
 {
 	public function isValidData($data)
@@ -13,7 +13,7 @@ class A extends AbstractAdapter
 		return false;
 	}
 
-	protected function getDomNode($data, $parent)// DOMNode $parent)
+	protected function getDomNode($data, $parent)
 	{
 		$element = $this->createElement($parent, 'a');
 		$element->setAttribute('href', $this->getProperty($data, 'href'));

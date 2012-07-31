@@ -1,13 +1,7 @@
 <?php
 namespace Respect\Template;
 
-//use \InvalidArgumentException as Argument;
-//use \UnexpectedValueException as Unexpected;
-//use \DOMImplementation;
-//use \DOMDocument;
-//use \DOMText;
-//use \DOMNode;
-use \ArrayObject;
+use ArrayObject;
 
 class Html extends ArrayObject
 {
@@ -38,10 +32,6 @@ class Html extends ArrayObject
 			foreach ($model->find($selector) as $modelNode)
 				foreach ($this->find($selector) as $targetNode)
 					$targetNode->outertext = $modelNode->outertext;
-//					$targetNode->parentNode->replaceChild(
-//						$this->document->getDom()->importNode($modelNode, true),
-//						$targetNode
-//					);
 	}
 
 	public function getDocument()
