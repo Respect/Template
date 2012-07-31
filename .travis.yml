@@ -1,14 +1,20 @@
-language:
-    php
+# a Courtesy of Respect/Foundation
+
+language: php
 
 php:
   - 5.3
   - 5.4
 
-before_script: 
-  - curl -s http://getcomposer.org/installer | php
-  - php composer.phar install
-  - cd tests
+before_script:
+  - make foundation-develop
+  - make composer-install
 
 script:
-  - phpunit --colors --coverage-text .
+  - make test
+
+notifications:
+  irc:
+    channels:
+      - "irc.freenode.org#php-respect"
+    use_notice: true
