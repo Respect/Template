@@ -40,8 +40,11 @@ class HtmlElement
         return "<{$this->nodeName}{$attrs} />";
     }
     
-    public function getDOMNode(DOMDocument $dom, $current=null)
+    public function getDOMNode(DOMDocument $dom = null, $current=null)
     {
+        if (is_null($dom))
+            $dom = new DOMDocument();
+            
         if (is_string($current))
             return new DOMText($current);
 

@@ -47,7 +47,10 @@ class HtmlElementTest extends \PHPUnit_Framework_TestCase
         $ul  = $dom->createElement('ul');
         $ul->appendChild($dom->createElement('li', 'one'));
         $ul->appendChild($dom->createElement('li', 'two'));
-        
+        $this->assertEquals(
+            $ul,
+            H::ul(H::li('one'), H::li('two'))->getDomNode()
+        );
     }
 }
 
