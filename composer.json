@@ -21,12 +21,18 @@
         }
     ],
     "require": {
-        "php": ">=5.3.3"
+        "php": ">=5.3.3",
+        "zendframework/zend-dom": "2.*"
     },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://packages.zendframework.com/"
+        }
+    ],
     "autoload": {
         "psr-0": {
-            "Respect\\Template": "library\/",
-            "Zend\\Dom": "library\/"
+            "Respect\\Template": "library\/"
         }
     }
 }

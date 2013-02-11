@@ -1,68 +1,169 @@
 <?php
+
 namespace Respect\Template;
 
-use \InvalidArgumentException as Argument;
-use \UnexpectedValueException as Unexpected;
-use \DOMImplementation;
-use \DOMDocument;
-use \DOMText;
-use \DOMNode;
-use \ArrayObject;
+use ArrayObject;
+use DOMDocument;
 
+/**
+ * An HTML template
+ */
 class Html extends ArrayObject
 {
-	/**
-	 * @var Respect\Template\Document
-	 */
-	protected $document;
-	public $aliasFor = array();
+    /** @var DOMDocument Real document instance */
+	public $document;
 	
-	public function __construct($templateFileOrString)
+	/**
+	 * @param mixed $template Any HTML data
+	 */
+	public function __construct($template)
 	{
-		if (file_exists($templateFileOrString))
-			$content = file_get_contents($templateFileOrString);
-		else
-			$content = $templateFileOrString;
-		$this->document = new Document($content);
+		if (file_exists($template)) {
+			$content = file_get_contents($template);
+		} else {
+			$content = $template;
+		}
+		
+		$this->document = new DOMDocument;
+		$this->document->strictErrorChecking = false;
+		$this->document->loadHtml($content);
 	}
 
+    /** Renders the template and return it */
 	public function __toString()
 	{
 		return $this->render();
 	}
-
-	public function inheritFrom(Html $model, $blockSelector, $anotherSelector=null, $etc=null)
-	{
-		$selectors = array_slice(func_get_args(), 1);
-		foreach ($selectors as $selector)
-			foreach ($model->find($selector) as $modelNode)
-				foreach ($this->find($selector) as $targetNode)
-					$targetNode->parentNode->replaceChild(
-						$this->document->getDom()->importNode($modelNode, true),
-						$targetNode
-					);
-	}
-
-	public function getDocument()
-	{
-		return $this->document;
-	}
-
+	
 	/**
-	 * @return array
+	 * Gets/Registers an operation to be performed on this template
+	 *
+	 * @param string $alias The name of this operation
+	 *
+	 * @return Respect\Template\Operation The operation object
+	 *
+	 * @see Respect\Template\Operation
+	 * @see Respect\Template\Operation::$name
 	 */
+	public function offsetGet($alias)
+	{
+	    return $this->registerOperation($alias);
+	}
+	
+	/**
+	 * Gets/Registers an operation to be performed on this template
+	 *
+	 * @param string $alias The name of this operation
+	 *
+	 * @return Respect\Template\Operation The operation object
+	 *
+	 * @see Respect\Template\Html::offsetGet
+	 * @see Respect\Template\Operation
+	 * @see Respect\Template\Operation::$name
+	 */
+	public function registerOperation($alias)
+	{
+	    if (!isset($this[$alias])) {
+	        parent::offsetSet($alias, new Operation($alias));
+	    }
+	    return parent::offsetGet($alias);
+	}
+	
+	/**
+	 * Feeds an operation with replacement data
+	 * 
+	 * @param string $alias       The name of the operation to be fed
+	 * @param mixed  $replacement The replacement data for the operation
+	 *
+	 * @return null
+	 
+	 * @see Respect\Template\Operation::feed
+	 */
+	public function offsetSet($alias, $replacement)
+	{
+	    $this[$alias]->feed($replacement);
+	}
+
+    /**
+     * Performs a CSS query in this document and return the matching nodes
+     *
+     * @param string $selector Any CSS2 Selector
+     *
+     * @return DOMNodeList A list of matching nodes
+	 
+	 * @see Respect\Template\Query
+	 * @see Respect\Template\Query::getResult
+     */
 	public function find($selector)
 	{
 		$query = new Query($this->document, $selector);
 		return $query->getResult();
 	}
 	
-	public function render($data=null, $beatiful=false)
+	/**
+	 * Applies operations and returns the rendered output
+	 *
+	 * @param bool $beautiful True if output should be formatted
+	 * 
+	 * @return string The HTML output
+	 *
+	 * @see Respect\Template\Operation::operate
+	 * @see Respect\Template\Operators\AbstractOperator::operate
+	 */
+	public function render($data=array(), $beautiful=false)
 	{
-		foreach ($this->aliasFor as $selector => $alias)
-			$this[$selector] = $this[$alias];
-
-		$data = $data ?: $this->getArrayCopy();
-		return $this->document->decorate($data)->render($beatiful);
+	    foreach ($data as $name => $value) {
+	        $this->offsetSet($name, $value);
+	    }
+	    foreach ($this->getArrayCopy() as $operation) {
+	        $operation($this->document);
+	    }
+		$this->document->formatOutput = $beautiful;
+		return $this->document->saveHTML();
+	}
+	
+	/**
+	 * Applies operations and returns the rendered output
+	 * 
+	 * @return string The HTML output
+	 *
+	 * @see Respect\Template\Operation::operate
+	 * @see Respect\Template\Operators\AbstractOperator::operate
+	 */
+	public function __invoke($data=array())
+	{
+		return $this->document->render($data);
+	}
+	
+	/**
+	 * Applies operations compiled as HTML Process Instructions compatible
+	 * with PHP code. Useful for caching templates in raw PHP.
+	 *
+	 * @param bool $beautiful True if output should be formatted
+	 *
+	 * @return string Raw PHP code that can be run
+	 *
+	 * @see Respect\Template\Operation::compile
+	 * @see Respect\Template\Operators\AbstractOperator::compile
+	 */
+	public function compile($beautiful=false)
+	{
+	    foreach ($this->getArrayCopy() as $operation) {
+	        $operation->compile($this->document);
+	    }
+		$this->document->formatOutput = $beautiful;
+		return preg_replace_callback(
+		    '#\{DECODE\}(.*?)\{\/DECODE\}#', 
+		    function ($matches) {
+		        return html_entity_decode($matches[1]);
+		    }, 
+		    $this->document->saveHTML()
+		);
+	}
+	
+	public static function __callStatic($operator, $args)
+	{
+	    $operation = new Operation(null);
+	    return call_user_func_array(array($operation, $operator), $args);
 	}
 }

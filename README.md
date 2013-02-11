@@ -1,12 +1,74 @@
 Respect\Template [![Build Status](https://secure.travis-ci.org/Respect/Template.png)](http://travis-ci.org/Respect/Template)
 ================
  
-Pure HTML Templates.
+What templates should be.
+
+  * Uses **pure** HTML with no extra tags, attributes or markup at all.
+  * Really fast, compiled, raw runtime.
+  * Clean, nice, easy API.
+  
+Quick Start
+-----------
+
+Respect\Template uses plain HTML files as templates, let's look at this one:
+
+```html
+<h1>Title</h1>
+<ul>
+  <li><a href="" title="">Example Link</a></li>
+</ul>
+```
+
+The PHP part handles every transformation on this template to get the final
+markup:
+
+```php
+<?php
+
+use Respect\Template\Html;
+
+$data = array(
+    'title' => 'Hello!',
+    'links' => array(
+        array('http://github.com/Respect' => 'Respect on GitHub'),
+        array('http://php.net' => 'PHP Website'),
+        array('http://w3.org' => 'W3C Website'),
+    )
+);
+
+$template = new Html('template.html'); //That HTML file above!
+
+$template['title']->text('h1');
+$template['links']->items(
+    'ul', //Parent
+    'li', //Children
+    Html::keys(
+        Html::attr('href'))
+    ->values(
+        Html::text()->attr('title')
+    )
+);
+
+$html = $template->render($data); //See below!
+print $html;
+```
+
+Awesome output:
+
+```html
+<h1>Hello!</h1>
+<ul>
+  <li><a href="http://github.com/Respect" title="Respect on GitHub">Respect on GitHub</a></li>
+  <li><a href="http://php.net" title="PHP Website">PHP Website</a></li>
+  <li><a href="http://w3.org" title="W3C Website">W3C Website</a></li>
+</ul>
+```
+
 
 License Information
 ===================
 
-Copyright (c) 2009-2012, Alexandre Gomes Gaigalas.
+Copyright (c) 2009-2013, Alexandre Gomes Gaigalas.
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification,
