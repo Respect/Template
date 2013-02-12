@@ -61,6 +61,28 @@ class Items extends AbstractSelectorOperator
      */
     public function compileNode(DOMNode $node, $name, $replacement)
     {
-        return $this->operateNode($node, $replacement);
+        $subName = 'item';
+        $prePopulation = Query::perform($node, $this->population);
+        foreach ($prePopulation as $itemTemplate) {
+            $foreachPI = $node->ownerDocument->createProcessingInstruction(
+                'php',
+                "foreach (\${$name} as \${$subName}Key => \${$subName}):"
+            );
+            $itemTemplate->parentNode->insertBefore(
+                $foreachPI,
+                $itemTemplate
+            );
+            $operation = clone $this->operation;
+            $operation->name = $subName;
+            $operation->feed($replacement)->compile($itemTemplate);
+            $endForeachPI = $node->ownerDocument->createProcessingInstruction(
+                'php',
+                "endforeach;"
+            );
+            $itemTemplate->parentNode->insertBefore(
+                $endForeachPI,
+                $itemTemplate->nextSibling
+            );
+        }
     }
 }

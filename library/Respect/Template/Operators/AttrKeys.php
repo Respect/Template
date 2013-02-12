@@ -56,6 +56,14 @@ class AttrKeys extends AbstractSelectorOperator
      */
     public function compileNode(DOMNode $node, $name, $replacement)
     {
-        return $this->operateNode($node, $replacement);
+        foreach ($this->keys as $name => $key) {
+            if (is_int($name)) {
+                $operator = new Attr($key);
+                $operator->compile($node, $key, $replacement);
+            } else {
+                $operator = new Attr($name);
+                $operator->compile($node, $name, $replacement);
+            }
+        }
     }
 }

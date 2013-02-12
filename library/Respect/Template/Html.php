@@ -146,14 +146,17 @@ class Html extends ArrayObject
 	 * @see Respect\Template\Operation::compile
 	 * @see Respect\Template\Operators\AbstractOperator::compile
 	 */
-	public function compile($beautiful=false)
+	public function compile($data=array(), $beautiful=false)
 	{
+	    foreach ($data as $name => $value) {
+	        $this->offsetSet($name, $value);
+	    }
 	    foreach ($this->getArrayCopy() as $operation) {
 	        $operation->compile($this->document);
 	    }
 		$this->document->formatOutput = $beautiful;
 		return preg_replace_callback(
-		    '#\{DECODE\}(.*?)\{\/DECODE\}#', 
+		    '#\{ATTRIBUTE\}(.*?)\{\/ATTRIBUTE\}#', 
 		    function ($matches) {
 		        return html_entity_decode($matches[1]);
 		    }, 

@@ -53,12 +53,16 @@ abstract class AbstractSelectorOperator extends AbstractOperator
      */
     public function compile(DOMNode $context, $name, $replacement)
     {
-        $nodes = Query::perform($context, $this->selector);
-        foreach ($nodes as $node) {
-            if (!is_null($replacement)) {
-                $this->operateNode($node, $replacement);
-            } else {
-                $this->compileNode($node, $name, $replacement);
+        if (is_null($this->selector)) {
+            $this->compileNode($context, $name, $replacement);
+        } else {
+            $nodes = Query::perform($context, $this->selector);
+            foreach ($nodes as $node) {
+                if (!is_null($replacement)) {
+                    $this->operateNode($node, $replacement);
+                } else {
+                    $this->compileNode($node, $name, $replacement);
+                }
             }
         }
     }

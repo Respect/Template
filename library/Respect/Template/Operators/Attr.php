@@ -34,6 +34,6 @@ class Attr extends AbstractAttributeOperator
     {
         $node->setAttribute(
             $this->attribute, 
-            '{DECODE}<?php echo $'.$name.';?>{/DECODE}');
+            '{ATTRIBUTE}<?php echo $'.$name.';?>{/ATTRIBUTE}');
     }
 }

@@ -49,6 +49,8 @@ class Keys extends AbstractOperator
      */
     public function compile(DOMNode $node, $name, $replacement)
     {
-        return $this->operateNode($node, $replacement);
+        $operation = clone $this->operation;
+        $operation->name = "{$name}Key";
+        $operation->feed($replacement)->compile($node);
     }
 }

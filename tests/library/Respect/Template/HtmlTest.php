@@ -56,6 +56,18 @@ class HtmlTest extends \PHPUnit_Framework_TestCase
         $template['myplace'] = array('one', 'two', 'three');
         $this->assertContains('<ul><li>one</li><li>two</li><li>three</li></ul><ol><li>Test</li></ol>', $template->render());
     }
+    public function testPopulateCompile()
+    {
+        $template = new Html('<ul><li></li></ul><ol><li>Test</li></ol>');
+        $template['myplace']->items('ul', 'li', Html::text());
+        $this->assertContains('<?php foreach ($myplace as $itemKey => $item):><li><?php echo $item;?></li><?php endforeach;></ul>', $template->compile());
+    }
+    public function testKeysCompile()
+    {
+        $template = new Html('<html><ul><li></li></ul><ol><li>Test</li></ol></html>');
+        $template['myplace']->items('ul', 'li', Html::keys(Html::text()));
+        $this->assertContains('<?php foreach ($myplace as $itemKey => $item):><li><?php echo $itemKey;?></li><?php endforeach;></ul>', $template->compile());
+    }
     public function testPopulateKeys()
     {
         $template = new Html('<ul><li></li></ul><ol><li>Test</li></ol>');
@@ -82,6 +94,12 @@ class HtmlTest extends \PHPUnit_Framework_TestCase
         $template['myplace']->attrKeys('ul li', array('class', 'id'));
         $template['myplace'] = (object) array('id' => 'one', 'class' =>  'a');
         $this->assertContains('<ul><li id="one" class="a"></ul><ol><li>Test</li></ol>', $template->render());
+    }
+    public function testAttrKeysCompile()
+    {
+        $template = new Html('<ul><li></li></ul><ol><li>Test</li></ol>');
+        $template['myplace']->attrKeys('ul li', array('class', 'id'));
+        $this->assertContains('<ul><li class="<?php echo $class;?>" id="<?php echo $id;?>"></ul><ol><li>Test</li></ol>', $template->compile());
     }
     public function testAttrKeysTranslation()
     {

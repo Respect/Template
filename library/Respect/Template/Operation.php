@@ -122,10 +122,10 @@ class Operation
      *
      * @see Respect\Template\Operation::compile
      */
-    public function compile(DOMNOde $context)
+    public function compile(DOMNOde $context, $name=null)
     {
         foreach ($this->operators as $operator) {
-            $operator->compile($context, $this->name, $this->replacement);
+            $operator->compile($context, $name ?: $this->name, $this->replacement);
         }
         return $context;
     }

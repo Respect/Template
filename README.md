@@ -3,7 +3,7 @@ Respect\Template [![Build Status](https://secure.travis-ci.org/Respect/Template.
  
 What templates should be.
 
-  * Uses **pure** HTML with no extra tags, attributes or markup at all.
+  * Uses **pure**, ordinary HTML decoupled from any extra markup.
   * Really fast, compiled, raw runtime.
   * Clean, nice, easy API.
   
@@ -27,17 +27,7 @@ markup:
 
 use Respect\Template\Html;
 
-$data = array(
-    'title' => 'Hello!',
-    'links' => array(
-        array('http://github.com/Respect' => 'Respect on GitHub'),
-        array('http://php.net' => 'PHP Website'),
-        array('http://w3.org' => 'W3C Website'),
-    )
-);
-
 $template = new Html('template.html'); //That HTML file above!
-
 $template['title']->text('h1');
 $template['links']->items(
     'ul', //Parent
@@ -46,6 +36,22 @@ $template['links']->items(
         Html::attr('href'))
     ->values(
         Html::text()->attr('title')
+    )
+);
+```
+
+And now we can feed it with some data...
+
+```php
+<?php
+
+//$template from the previous snippet
+$data = array(
+    'title' => 'Hello!',
+    'links' => array(
+        array('http://github.com/Respect' => 'Respect on GitHub'),
+        array('http://php.net' => 'PHP Website'),
+        array('http://w3.org' => 'W3C Website'),
     )
 );
 
