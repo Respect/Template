@@ -81,8 +81,9 @@ class Document
 	 */
 	public function getQueryDocument()
 	{
-		if (!$this->queryDocument)
+		if (! $this->queryDocument) {
 			return $this->queryDocument = new DomQuery($this->render());
+		}
 
 		return $this->queryDocument;
 	}
