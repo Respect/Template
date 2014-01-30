@@ -32,12 +32,29 @@ class Query
 	public function getResult()
 	{
 		// Get results by a CSS selector
-		$selector = $this->selector;
+		$selector = $this->tratePseudoSelector();
 		$document = $this->document->getQueryDocument();
 		$results  = $document->execute($selector);
-		$xpath    = $results->getXpathQuery();
+		echo $xpath    = $results->getXpathQuery();
 		$domxpath = new DOMXPath($this->document->getDom());
 		$nodelist = iterator_to_array($domxpath->query($xpath));
 		return $nodelist;
+	}
+
+	private function hasPseudoSelector()
+	{
+		if (preg_match('/:(.+\S)/', $this->selector, $match)) {
+			return $match[1];
+		}
+		return false;
+	}
+
+	private function tratePseudoSelector()
+	{
+		if ($pseudoSelector = $this->hasPseudoSelector()) {
+			$pseudoSelector = Factory::PseudoElement($pseudoSelector);
+			return $pseudoSelector->apply($this->selector);
+		}
+		return $this->selector;
 	}
 }

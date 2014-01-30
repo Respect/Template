@@ -31,4 +31,6 @@ $template['#preamble .p1']     = H::div(
 $template['#preamble .p2'] = 'The key concept to understand Respect\Template is simple: isolation of concerns. Backend developers should handle data and serve them properly while frontend developers should do the shinning stuff (CSS and Javascript).';
 $template['#preamble .p3'] = 'Respect\Template aims to be easy to use by everyone, with minimum learning curve, minimal impact on the existing code and awesome as possible!';
 
+$template['#lselect ul li:first-child'] = H::h1('I\'m first');
+
 echo $template->render();
