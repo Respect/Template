@@ -1,32 +1,25 @@
 {
-    "name": "Respect\/Template",
+    "name": "respect/template",
     "description": "Pure HTML templates",
-    "version": "0.1.5",
     "type": "library",
-    "time": "2012-04-11 09:00:28",
-    "homepage": "",
+    "homepage": "http://respect.li/",
     "license": "BSD Style",
     "authors": [
         {
-            "name": "Alexandre Gaigalas",
-            "email": "alexandre@gaigalas.net"
-        },
-        {
-            "name": "Augusto Pascutti",
-            "email": "augusto@phpsp.org.br"
-        },
-        {
-            "name": "Henrique Moody",
-            "email": "henriquemoody@gmail.com"
+            "name": "Respect/Template Contributors",
+            "homepage": "https://github.com/Respect/Template/graphs/contributors"
         }
     ],
     "require": {
-        "php": ">=5.3.3"
+        "php": ">=5.3.3",
+        "zendframework/zend-dom": "~2.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~3.0"
     },
     "autoload": {
-        "psr-0": {
-            "Respect\\Template": "library\/",
-            "Zend\\Dom": "library\/"
+        "psr-4": {
+            "Respect\\": "library/Respect/"
         }
     }
 }
