@@ -35,7 +35,7 @@ EOD;
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN"
    "http://www.w3.org/TR/html4/frameset.dtd">
 EOD;
-    const XHTML_1_0_Strict = <<<'EOD'
+    const XHTML_1_0_STRICT = <<<'EOD'
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 EOD;

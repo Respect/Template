@@ -15,7 +15,7 @@ class Html extends ArrayObject
     const HTML_4_01_STRICT = Document::HTML_4_01_STRICT;
     const HTML_4_01_TRANSITIONAL = Document::HTML_4_01_TRANSITIONAL;
     const HTML_4_01_FRAMESET = Document::HTML_4_01_FRAMESET;
-    const XHTML_1_0_Strict = Document::XHTML_1_0_Strict;
+    const XHTML_1_0_STRICT = Document::XHTML_1_0_STRICT;
     const XHTML_1_0_TRANSITIONAL = Document::XHTML_1_0_TRANSITIONAL;
     const XHTML_1_0_FRAMESET = Document::XHTML_1_0_FRAMESET;
     const XHTML_1_1 = Document::XHTML_1_1;
