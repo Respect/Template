@@ -5,10 +5,9 @@ php:
   - 5.3
   - 5.4
 
-before_script: 
+before_script:
   - curl -s http://getcomposer.org/installer | php
   - php composer.phar install
-  - cd tests
 
 script:
-  - phpunit --colors --coverage-text .
+  - vendor/bin/phpunit --configuration phpunit.xml.dist --colors
