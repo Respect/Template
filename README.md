@@ -1,38 +1,21 @@
-Respect\Template
-================
-
-[![Build Status](https://secure.travis-ci.org/Respect/Template.png)](http://travis-ci.org/Respect/Template) [![Latest Stable Version](https://poser.pugx.org/respect/template/v/stable.png)](https://packagist.org/packages/respect/template) [![Total Downloads](https://poser.pugx.org/respect/template/downloads.png)](https://packagist.org/packages/respect/template) [![Latest Unstable Version](https://poser.pugx.org/respect/template/v/unstable.png)](https://packagist.org/packages/respect/template) [![License](https://poser.pugx.org/respect/template/license.png)](https://packagist.org/packages/respect/template)
+# Respect\Template
+[![Build Status](https://img.shields.io/travis/Respect/Template.svg?style=flat-square)](http://travis-ci.org/Respect/Template)
+[![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/Respect/Template.svg?style=flat-square)](https://scrutinizer-ci.com/g/Respect/Template/?branch=master)
+[![Latest Stable Version](https://img.shields.io/packagist/v/respect/template.svg?style=flat-square)](https://packagist.org/packages/respect/template)
+[![Total Downloads](https://img.shields.io/packagist/dt/respect/template.svg?style=flat-square)](https://packagist.org/packages/respect/template)
+[![License](https://img.shields.io/packagist/l/respect/template.svg?style=flat-square)](https://packagist.org/packages/respect/template)
 
 Pure HTML Templates.
 
-License Information
-===================
+## Installation
 
-Copyright (c) 2009-2012, Alexandre Gomes Gaigalas.
-All rights reserved.
+The package is available on [Packagist](https://packagist.org/packages/respect/template).
+You can install it using [Composer](http://getcomposer.org).
 
-Redistribution and use in source and binary forms, with or without modification,
-are permitted provided that the following conditions are met:
+```bash
+composer require respect/template
+```
 
-* Redistributions of source code must retain the above copyright notice,
-  this list of conditions and the following disclaimer.
+## License Information
 
-* Redistributions in binary form must reproduce the above copyright notice,
-  this list of conditions and the following disclaimer in the documentation
-  and/or other materials provided with the distribution.
-
-* Neither the name of Alexandre Gomes Gaigalas nor the names of its
-  contributors may be used to endorse or promote products derived from this
-  software without specific prior written permission.
-
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
-ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
-WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
-ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
-(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
-LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
-SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
+See [LICENSE](LICENSE) file.

@@ -23,7 +23,7 @@ $template['#preamble .p1']     = H::div(
     H::dl(
         H::dt('PHP Developers'),
         H::dd('Very basic (really basic) knowledge of arrays and CSS selectors.'),
-        
+
         H::dt('Front End Developers'),
         H::dd('Nothing')
     )
