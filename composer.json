@@ -1,10 +1,8 @@
 {
-    "name": "Respect\/Template",
+    "name": "Respect/Template",
     "description": "Pure HTML templates",
-    "version": "0.1.5",
     "type": "library",
-    "time": "2012-04-11 09:00:28",
-    "homepage": "",
+    "homepage": "https://github.com/Respect/Template",
     "license": "BSD Style",
     "authors": [
         {
@@ -22,14 +20,8 @@
     ],
     "require": {
         "php": ">=5.3.3",
-        "zendframework/zend-dom": "2.*"
+        "zendframework/zend-dom": "^2.5"
     },
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "https://packages.zendframework.com/"
-        }
-    ],
     "autoload": {
         "psr-0": {
             "Respect\\Template": "library\/"
