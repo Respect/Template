@@ -5,7 +5,7 @@ namespace Respect\Template;
 use DOMXPath;
 use DOMDocument;
 use DOMNode;
-use Zend\Dom\Css2Xpath;
+use Zend\Dom;
 
 /**
  * A CSS query in a document
@@ -55,7 +55,7 @@ class Query
 	{
 		// Get results by a CSS selector
 		$selector = $this->selector;
-		$xpath    = Css2Xpath::transform($selector);
+		$xpath	  = Dom\Document\Query::cssToXpath($selector);
 		if ($this->document instanceof DOMDocument) {
 	    	$domxpath = new DOMXPath($this->document);
     		$nodelist = $domxpath->query($xpath);

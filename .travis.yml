@@ -4,11 +4,12 @@ language:
 php:
   - 5.3
   - 5.4
+  - 5.5
+  - 5.6
+  - 7
 
-before_script: 
-  - curl -s http://getcomposer.org/installer | php
-  - php composer.phar install
-  - cd tests
+before_script:
+  - composer install --no-interaction --quiet
 
 script:
-  - phpunit --colors --coverage-text .
+  - phpunit --colors --coverage-text
